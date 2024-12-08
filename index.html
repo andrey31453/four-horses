@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -8,21 +8,39 @@
 		/>
 		<title>4 horses</title>
 		<link
-			rel="stylesheet"
-			href="./src/assets/style.css"
+			id="logo"
+			rel="shortcut icon"
+			type="image/x-icon"
+			href="/src/assets/icons/favicon.svg"
 		/>
+		<link
+			rel="stylesheet"
+			href="src/assets/styles/index.css"
+		/>
+
+		<!-- font -->
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..900&family=Merriweather&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- /font -->
+	</head>
+
+	<body>
+		<div id="app"></div>
 		<script
 			defer
 			type="module"
 			src="./src/main.js"
 		></script>
-	</head>
-	<body>
-		<!-- это якорь для самописной функции. не vue/react -->
-		<!-- путь к функции ./src/utils/load-template.js -->
-		<!-- да избыточно) низачем. просто по приколу -->
-		<div id="app"></div>
-
-		<a-header id="test" test="sdfsdfs"></a-header>
 	</body>
 </html>

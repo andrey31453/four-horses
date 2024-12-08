@@ -1,3 +1,1 @@
-import './header'
-
-const t = 'fsf'
+import './body'
