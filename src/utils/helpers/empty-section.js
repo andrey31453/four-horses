@@ -1,2 +1,1 @@
-export const emptySection = (height) =>
-  `<section style="height: ${height}px"></section>`
+export const emptySection = (_class) => `<section class="${_class}" ></section>`

@@ -1,14 +1,15 @@
-import { addScreens } from './screens'
-import { defineVars } from './vars'
+import { withModifiers } from './modifiers'
 
-const textClass = (name) => addScreens(`text-${name} {color: var(--${name});}`)
+const decorationClass = (name) =>
+	withModifiers(`decoration-${name} {text-decoration-color: var(--${name});}`)
+const textClass = (name) =>
+	withModifiers(`text-${name} {color: var(--${name});}`)
 const bgClass = (name) =>
-	addScreens(`bg-${name} {background-color: var(--${name});}`)
-const createColorClasses = (colors) =>
-	Object.entries(colors).reduce(
-		(style, [name]) => [style, textClass(name), bgClass(name)].join(''),
-		'',
-	)
+	withModifiers(`bg-${name} {background-color: var(--${name});}`)
 
 export const createColorStyle = (config) =>
-	[defineVars(config), createColorClasses(config)].join('')
+	Object.entries(config).reduce(
+		(style, [name]) =>
+			[style, decorationClass(name), textClass(name), bgClass(name)].join(''),
+		'',
+	)

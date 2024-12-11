@@ -1,32 +1,85 @@
-import { addScreens } from './screens'
+import { withModifiers } from './modifiers'
 
-const gapClass = (size) => addScreens(`gap-${size} {gap: ${size / 4}rem;}`)
-const paddingClass = (size) =>
-  addScreens([
-    `p-${size} {padding: ${size / 4}rem;}`,
-    `px-${size} {padding-left: ${size / 4}rem;padding-right: ${size / 4}rem;}`,
-    `py-${size} {padding-top: ${size / 4}rem;padding-bottom: ${size / 4}rem;}`,
-    `pl-${size} {padding-left: ${size / 4}rem;}`,
-    `pr-${size} {padding-right: ${size / 4}rem;}`,
-    `pt-${size} {padding-top: ${size / 4}rem;}`,
-    `pb-${size} {padding-bottom: ${size / 4}rem;}`,
-  ])
-const marginClass = (size) =>
-  addScreens([
-    `m-${size} {margin: ${size / 4}rem;}`,
-    `mx-${size} {margin-left: ${size / 4}rem;margin-right: ${size / 4}rem;}`,
-    `my-${size} {margin-top: ${size / 4}rem;margin-bottom: ${size / 4}rem;}`,
-    `ml-${size} {margin-left: ${size / 4}rem;}`,
-    `mr-${size} {margin-right: ${size / 4}rem;}`,
-    `mt-${size} {margin-top: ${size / 4}rem;}`,
-    `mb-${size} {margin-bottom: ${size / 4}rem;}`,
-  ])
+const initialClasses = withModifiers(['w-full{width:100%}'])
+
+const sizeClass = ({ name, remSize }) =>
+	withModifiers([
+		`size-${name} {width: ${remSize}rem;height: ${remSize}rem;}`,
+		`min-size-${name} {min-width: ${remSize}rem;height: ${remSize}rem;}`,
+		`max-size-${name} {max-width: ${remSize}rem;height: ${remSize}rem;}`,
+	])
+const wClass = ({ name, remSize }) =>
+	withModifiers([
+		`w-${name} {width: ${remSize}rem;}`,
+		`min-w-${name} {min-width: ${remSize}rem;}`,
+		`max-w-${name} {max-width: ${remSize}rem;}`,
+	])
+const hClass = ({ name, remSize }) =>
+	withModifiers([
+		`h-${name} {height: ${remSize}rem;}`,
+		`min-h-${name} {min-height: ${remSize}rem;}`,
+		`max-h-${name} {max-height: ${remSize}rem;}`,
+	])
+const positionClass = ({ name, remSize }) =>
+	withModifiers([
+		`inset-${name} {inset: ${remSize}rem;}`,
+		`top-${name} {top: ${remSize}rem;}`,
+		`right-${name} {right: ${remSize}rem;}`,
+		`bottom-${name} {bottom: ${remSize}rem;}`,
+		`left-${name} {left: ${remSize}rem;}`,
+	])
+const gapClass = ({ name, remSize }) =>
+	withModifiers([
+		`gap-${name} {gap: ${remSize}rem;}`,
+		`gap-x-${name} {column-gap: ${remSize}rem;}`,
+		`gap-y-${name} {row-gap: ${remSize}rem;}`,
+	])
+const paddingClass = ({ name, remSize }) =>
+	withModifiers([
+		`p-${name} {padding: ${remSize}rem;}`,
+		`px-${name} {padding-left: ${remSize}rem;padding-right: ${remSize}rem;}`,
+		`py-${name} {padding-top: ${remSize}rem;padding-bottom: ${remSize}rem;}`,
+		`pl-${name} {padding-left: ${remSize}rem;}`,
+		`pr-${name} {padding-right: ${remSize}rem;}`,
+		`pt-${name} {padding-top: ${remSize}rem;}`,
+		`pb-${name} {padding-bottom: ${remSize}rem;}`,
+	])
+const marginClass = ({ name, remSize }) =>
+	withModifiers([
+		`m-${name} {margin: ${remSize}rem;}`,
+		`mx-${name} {margin-left: ${remSize}rem;margin-right: ${remSize}rem;}`,
+		`my-${name} {margin-top: ${remSize}rem;margin-bottom: ${remSize}rem;}`,
+		`ml-${name} {margin-left: ${remSize}rem;}`,
+		`mr-${name} {margin-right: ${remSize}rem;}`,
+		`mt-${name} {margin-top: ${remSize}rem;}`,
+		`mb-${name} {margin-bottom: ${remSize}rem;}`,
+	])
+
+const withHalf = (size) => ({ name: `${size}\\.5`, remSize: (size + 0.5) / 4 })
+const withoutHalf = (size) => ({ name: size, remSize: size / 4 })
 
 export const createSizeClasses = (config) =>
-  [...Array(config.sizes).keys()]
-    .map((i) => i + 1)
-    .reduce(
-      (style, size) =>
-        [style, gapClass(size), paddingClass(size), marginClass(size)].join(''),
-      '',
-    )
+	initialClasses +
+	[...Array(config.baseQuantity + 1).keys()].reduce(
+		(style, size) =>
+			[
+				style,
+				positionClass(withoutHalf(size)),
+				gapClass(withoutHalf(size)),
+				paddingClass(withHalf(size)),
+				paddingClass(withoutHalf(size)),
+				marginClass(withoutHalf(size)),
+			].join(''),
+		'',
+	) +
+	[...Array(config.increasedQuantity + 1).keys()].reduce(
+		(style, size) =>
+			style +
+			[
+				sizeClass(withHalf(size)),
+				sizeClass(withoutHalf(size)),
+				wClass(withoutHalf(size)),
+				hClass(withoutHalf(size)),
+			].join(''),
+		'',
+	)

@@ -5,17 +5,34 @@ import { utilsStyle } from '@/utils/helpers/style'
 
 import header from '@/templates/header.html?raw'
 import support from '@/templates/support.html?raw'
+import about from '@/templates/about.html?raw'
+import stages from '@/templates/stages.html?raw'
+import footer from '@/templates/footer.html?raw'
+import runningLine from '@/templates/running-line.html?raw'
+import { useScreenClass } from './composables/screenClass'
 
 bootstrap()
-	.use(defineTemplate('style', null, utilsStyle()))
-	.use(
+	.use(useScreenClass)
+	.template(defineTemplate('style', null, utilsStyle()))
+	.template(
 		defineTemplate(
 			'div',
 			{
 				id: 'main',
 				class: 'bg-white text-black text-merriweather',
 			},
-			[header, emptySection(80), support],
+			[
+				header,
+				runningLine,
+				emptySection('h-14 md:h-24'),
+				support,
+				emptySection('h-6 md:h-16'),
+				about,
+				emptySection('h-30 md:h-50'),
+				stages,
+				runningLine,
+				footer,
+			],
 		),
 	)
 	.mount('#app')

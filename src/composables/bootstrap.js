@@ -1,20 +1,27 @@
 import '@/components'
 
 class Bootstrap {
-  #templates = []
+	#templates = []
+	#uses = []
 
-  use = (template) => {
-    this.#templates.push(template)
-    return this
-  }
+	use = (composable) => {
+		this.#uses.push(composable)
+		return this
+	}
 
-  mount = (selector) => {
-    const target = document.querySelector(selector)
-    if (!target) {
-      throw new Error(`Body not have ${selector}`)
-    }
+	template = (template) => {
+		this.#templates.push(template)
+		return this
+	}
 
-    this.#templates.forEach((template) => target.appendChild(template))
-  }
+	mount = (selector) => {
+		const target = document.querySelector(selector)
+		if (!target) {
+			throw new Error(`Body not have ${selector}`)
+		}
+
+		this.#uses.forEach((use) => use())
+		this.#templates.forEach((template) => target.appendChild(template))
+	}
 }
 export const bootstrap = () => new Bootstrap()
