@@ -1,15 +1,16 @@
 import { config } from '@/assets/config'
 import { layers, withLayer } from './layers'
 
-const withImportant = (classes) =>
-	[classes].flat().reduce((classesWithImportant, c) => {
-		classesWithImportant.push(c)
-		classesWithImportant.push(`\\!${c.replace(/;/, ' !important;')}`)
-		return classesWithImportant
-	}, [])
+const withImportant = (classesWithImportant, c) => {
+	classesWithImportant.push(c)
+	classesWithImportant.push(`\\!${c.replace(/;/, ' !important;')}`)
+	return classesWithImportant
+}
 
 export const withModifiers = (classes) =>
-	withImportant(classes)
+	[classes]
+		.flat()
+		.reduce(withImportant, [])
 		.map(
 			(c) =>
 				withLayer(layers.utils, '.' + c) +

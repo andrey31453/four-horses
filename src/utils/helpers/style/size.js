@@ -1,6 +1,9 @@
 import { withModifiers } from './modifiers'
 
-const initialClasses = withModifiers(['w-full{width:100%}'])
+const initialClasses = withModifiers([
+	'w-full{width:100%}',
+	'max-w-full{width:100%}',
+])
 
 const sizeClass = ({ name, remSize }) =>
 	withModifiers([

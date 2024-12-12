@@ -1,5 +1,6 @@
 export const config = {
 	screens: {
+		xs: 0,
 		sm: 640,
 		md: 768,
 		lg: 1024,
@@ -17,6 +18,17 @@ export const config = {
 	},
 
 	font: {
+		bold: {
+			thin: 100,
+			extralight: 200,
+			light: 300,
+			normal: 400,
+			medium: 500,
+			semibold: 600,
+			bold: 700,
+			extrabold: 800,
+			black: 900,
+		},
 		sizes: {
 			xs: 16,
 			sm: 18,
@@ -35,13 +47,15 @@ export const config = {
 	},
 
 	colors: {
+		transparent: 'transparent',
+
 		white: '#ffffff',
-		'white-additional': '#e9ded4',
 		black: '#313131',
 		red: '#f54932',
 		blue: '#3057a2',
 
 		primary: '#f54932',
+		surface: '#e9ded4',
 
 		'secondary-200': '#585653',
 		'secondary-300': '#6f6f6f',

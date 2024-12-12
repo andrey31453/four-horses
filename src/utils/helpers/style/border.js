@@ -22,7 +22,7 @@ export const createBorderClasses = (sizes, colors) =>
 	[...Array(sizes.decreasedQuantity + 1).keys()].reduce(
 		(style, size) =>
 			[style, roundedClass(size), borderWidthClass(size)].join(''),
-		'',
+		withModifiers(`rounded-full {border-radius: 9999px;}`),
 	) +
 	Object.entries(colors).reduce(
 		(style, [name]) => [style, borderColorClass(name)].join(''),

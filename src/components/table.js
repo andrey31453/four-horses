@@ -49,14 +49,13 @@ class Table extends HTMLElement {
 		defineShadow.call(
 			this,
 			`
-<style>
-${utilsStyle()}
-</style>
-
 <div class="grid md:grid-cols-${this.#colsQuantity}">
 	${this.#data}
 </div>
-`,
+
+<style>
+${utilsStyle()}
+</style>`,
 		)
 	}
 }

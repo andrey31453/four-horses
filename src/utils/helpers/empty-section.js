@@ -1,1 +1,1 @@
-export const emptySection = (_class) => `<section class="${_class}" ></section>`
+export const emptySection = (_class) => `<div class="${_class}" ></div>`

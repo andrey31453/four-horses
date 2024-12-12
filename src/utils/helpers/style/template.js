@@ -3,6 +3,7 @@ import { layers, withLayer } from './layers'
 
 const _templateStyle = withModifiers([
 	'block {display: block;}',
+	'hidden {display: none;}',
 
 	'static {position: static;}',
 	'relative {position: relative;}',
@@ -15,5 +16,7 @@ const _templateStyle = withModifiers([
 	'whitespace-nowrap {white-space: nowrap;}',
 
 	'line-through {text-decoration-line: line-through;}',
+
+	'invisible {visibility: hidden;}',
 ])
 export const templateStyle = withLayer(layers.utils, _templateStyle)
