@@ -50,8 +50,6 @@ class SliderControls extends HTMLElement {
 			cb: this.#next,
 		})
 		this.#bus.emit('update', this.#update)
-		this.#bus.emit('prev', this.#prev)
-		this.#bus.emit('next', this.#next)
 	}
 
 	// render

@@ -86,14 +86,14 @@ ${utilsStyle()}
 	}
 	get #sliderShift() {
 		return (
-			(this.#bus.state.slide.current + 1) *
+			-(this.#bus.state.slide.current + 1) *
 			(this.#node.zeroChild.offsetWidth + 20)
 		)
 	}
 	get #sliderStyle() {
 		return `
 max-width: ${this.#containerWidth}px;
-transform: translate3d(-${this.#sliderShift}px, 0px, 0);`
+transform: translate3d(${this.#sliderShift}px, 0px, 0);`
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
