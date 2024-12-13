@@ -1,4 +1,4 @@
-import { config } from '@/assets/config'
+import { config } from 'src/assets/config'
 import { layers, withLayer } from './layers'
 
 const withImportant = (classesWithImportant, c) => {

@@ -1,5 +1,5 @@
-import { utilsStyle } from '@/utils/helpers/style'
-import { isScreen } from '@/utils/helpers/screen'
+import { utilsStyle } from 'src/utils/helpers/style'
+import { isScreen } from 'src/utils/helpers/screen'
 import { defineShadow } from '../utils/helpers/shadow'
 import { debounce } from '../utils/helpers/debounce'
 

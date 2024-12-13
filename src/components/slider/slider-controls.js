@@ -1,7 +1,7 @@
-import { utilsStyle } from '@/utils/helpers/style'
-import { defineShadow } from '@/utils/helpers/shadow'
-import { mounted } from '@/utils/helpers/component'
-import { callback } from '@/composables/callback'
+import { utilsStyle } from 'src/utils/helpers/style'
+import { defineShadow } from 'src/utils/helpers/shadow'
+import { mounted } from 'src/utils/helpers/component'
+import { callback } from 'src/composables/callback'
 import { keys } from './config'
 import { hasSlider } from './bus'
 

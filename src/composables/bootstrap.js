@@ -1,4 +1,4 @@
-import '@/components'
+import 'src/components'
 
 class Bootstrap {
 	#templates = []

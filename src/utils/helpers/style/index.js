@@ -1,5 +1,5 @@
-import { singleton } from '@/utils/helpers/singleton'
-import { config } from '@/assets/config'
+import { singleton } from 'src/utils/helpers/singleton'
+import { config } from 'src/assets/config'
 import { createGridClasses } from './grid'
 import { createSizeClasses } from './size'
 import { createColorStyle } from './color'

@@ -1,4 +1,4 @@
-import { callback } from '@/composables/callback'
+import { callback } from 'src/composables/callback'
 
 class Button extends HTMLButtonElement {
 	static observedAttributes = ['a-disabled']

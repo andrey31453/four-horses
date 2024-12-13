@@ -1,6 +1,6 @@
-import { utilsStyle } from '@/utils/helpers/style'
-import { defineShadow } from '@/utils/helpers/shadow'
-import { debounce } from '@/utils/helpers/debounce'
+import { utilsStyle } from 'src/utils/helpers/style'
+import { defineShadow } from 'src/utils/helpers/shadow'
+import { debounce } from 'src/utils/helpers/debounce'
 import { isScreen } from '../utils/helpers/screen'
 
 //	mobile stages
