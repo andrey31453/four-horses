@@ -20,6 +20,7 @@ class Bootstrap {
 			throw new Error(`Body not have ${selector}`)
 		}
 
+		target.setAttribute('a-mount', '')
 		this.#uses.forEach((use) => use())
 		this.#templates.forEach((template) => target.appendChild(template))
 	}

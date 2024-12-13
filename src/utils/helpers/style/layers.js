@@ -1,6 +1,7 @@
 export const layers = {
 	base: 'base',
 	utils: 'utils',
+	pseudo: 'pseudo',
 	screens: 'screens',
 }
 

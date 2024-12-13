@@ -4,7 +4,7 @@ import { debounce } from './debounce'
 
 export const mounted = function (cbs) {
 	if (!this.clientWidth) {
-		return setTimeout(() => mounted.call(this, cbs), 30)
+		return setTimeout(() => mounted.call(this, cbs), 10)
 	}
 
 	;[cbs].flat().forEach((cb) => {

@@ -25,11 +25,13 @@ class Participant extends HTMLElement {
 		<image class="w-full" src="${this.getAttribute('image') ?? '/src/assets/icons/participant.svg'}">
 	</div>
 	<div class="h-4"></div>
-	<div class="text-center leading-120 text-golos-text font-semibold text-xl">${this.getAttribute('name')}</div>
-	<div class="text-center leading-120 text-golos-text text-secondary-400">${this.getAttribute('title')}</div>
+	<div class="text-center leading-120 text-golos font-semibold text-xl">${this.getAttribute('name')}</div>
+	<div class="text-center leading-120 text-golos text-secondary-400">${this.getAttribute('title')}</div>
 	<div class="h-2"></div>
 	<button
 		is="a-button"
+		a-severity="info"
+		a-size="sm"
 		a-name="participant-goTo"
 		a-prop="${this.getAttribute('href')}"
 	>

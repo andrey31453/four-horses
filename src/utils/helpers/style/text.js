@@ -5,7 +5,7 @@ const initialTextClasses = withModifiers([
   font-family: 'Merriweather',serif;
   font-style: normal;
 }`,
-	`text-golos-text {
+	`text-golos {
   font-family: 'Golos Text',
   sans-serif;
   font-optical-sizing: auto;

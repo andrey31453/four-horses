@@ -1,2 +1,5 @@
 TODO this.#render => useRender?
 TODO 'resize' таблицы и тд багует
+TODO add comment to props
+TODO add max min to w & h
+TODO button -> tailwind

@@ -1,109 +1,82 @@
-import { keys } from './config'
-
-export const hasSlider = function () {
-	return props.has(this.getAttribute(keys.id))
-}
-
-const defineInitialState = function (id, ctx) {
-	return props.get(id).infinity
-		? {
-				slide: {
-					current: 0,
-					quantity: [...ctx.children].length - 1,
-					min: -1,
-					max: [...ctx.children].length,
-				},
-				ctx,
-			}
-		: {
-				slide: {
-					current: 0,
-					quantity: [...ctx.children].length - 1,
-					min: 0,
-					max: [...ctx.children].length - 1,
-				},
-				ctx,
-			}
-}
-const defineProps = function (ctx) {
-	return {
-		controlsVariant: ctx.getAttribute('controls-variant') ?? 'base',
-		infinity: ctx.getAttribute('infinity') !== undefined,
-		autoChange: +ctx.getAttribute('auto-change'),
-		slides: JSON.parse(ctx.getAttribute('slides') ?? {}),
-	}
-}
-
-//
-// bus
-//
-
-const props = new Map()
-const state = {}
-const cbs = []
+import { nextTick } from '/src/utils/helpers/next-tick'
+import { store } from './store'
 
 export class SliderBus {
 	#id
-	#timeout
 	constructor(id, ctx) {
 		this.#id = id
 		if (!ctx) return
 
-		props.set(id, defineProps(ctx))
-		state[id] = defineInitialState(id, ctx)
-		this.#defineState()
-		this.#initAutoChange()
+		store.define(id, ctx)
+		store.update(id)
+		this.#initAutoChange(id)
 	}
 
-	#defineState = () => {
-		this.state.disabled = {
-			prev: this.state.slide.current === this.state.slide.min,
-			next: this.state.slide.current === this.state.slide.max,
-		}
+	get state() {
+		return store.state(this.#id)
 	}
 	get props() {
-		return props.get(this.#id)
+		return store.props(this.#id)
 	}
-	get state() {
-		return state[this.#id]
+	get cbs() {
+		return store.cbs(this.#id)
+	}
+
+	#fixState = () => {
+		if (this.state.slide.current < 0) {
+			nextTick(() => {
+				this.state.slide.current =
+					this.state.slide.quantity + this.state.slide.current
+				this.on('force-update')
+			})
+		}
+		if (this.state.slide.current > this.state.slide.quantity) {
+			nextTick(() => {
+				this.state.slide.current =
+					this.state.slide.current - this.state.slide.quantity
+				this.on('force-update')
+			})
+		}
 	}
 
 	// cbs
 	emit = (name, cb) => {
-		cbs.push({
-			id: this.#id,
+		this.cbs.push({
 			name,
 			cb,
 		})
 	}
 	on = (cbName) => {
-		cbs
-			.filter(({ id, name }) => id === this.#id && name === cbName)
-			.forEach(({ cb }) => cb())
+		this.cbs.filter(({ name }) => name === cbName).forEach(({ cb }) => cb())
 	}
 
 	// changes state
 	prev = () => {
-		clearTimeout(this.state.timeout)
-		this.#autoChange()
-
+		this.#resetAutoChange()
 		this.state.slide.current--
-		this.#defineState()
+		store.update(this.#id)
+		this.#fixState()
 	}
-	next = (auto) => {
-		if (!auto) {
-			clearTimeout(this.state.timeout)
-			this.#autoChange()
-		}
-
+	next = () => {
+		this.#resetAutoChange()
+		this.#_next()
+	}
+	#_next = () => {
 		this.state.slide.current++
-		this.#defineState()
+		store.update(this.#id)
+		this.#fixState()
 	}
 
 	// auto change
+	#resetAutoChange = () => {
+		if (!this.props.autoChange) return
+
+		clearTimeout(this.state.timeout)
+		this.#autoChange()
+	}
 	#autoChange = () => {
 		this.state.timeout = setTimeout(() => {
-			this.next(true)
+			this.#_next()
 			this.on('update')
 			this.#autoChange()
 		}, 1000 * this.props.autoChange)
@@ -117,7 +90,6 @@ export class SliderBus {
 				'Auto-сhange можно применять только вместе с infinity',
 			)
 		}
-
 		this.#autoChange()
 	}
 }

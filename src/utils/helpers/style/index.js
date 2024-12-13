@@ -10,6 +10,7 @@ import { scrollStyle } from './scroll'
 import { templateStyle } from './template'
 import { defineVars } from './vars'
 import { createBorderClasses } from './border'
+import { createButtonClasses } from './button'
 
 export const utilsStyle = singleton(() =>
 	[
@@ -24,5 +25,6 @@ export const utilsStyle = singleton(() =>
 		createGridClasses(config.grid),
 		createColorStyle(config.colors),
 		createTextClasses(config.font),
+		createButtonClasses(),
 	].join(''),
 )

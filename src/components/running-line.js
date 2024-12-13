@@ -39,7 +39,7 @@ ${slot}
 ${utilsStyle()}
 
 .marquee-item {
-  transition: all var(--animation-time) ease-in-out;
+  transition: all var(--animation-duration) ease-in-out;
 }
 .marquee-items {
   animation: marquee ${this.getAttribute('duration')}s linear infinite;

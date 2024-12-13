@@ -7,12 +7,27 @@ const withImportant = (classesWithImportant, c) => {
 	return classesWithImportant
 }
 
+const withPseudo = (classesWithPseudo, c) => {
+	classesWithPseudo.push(c)
+	classesWithPseudo.push(`hover\\:${c.replace(/\s{/, ':hover {')}`)
+	classesWithPseudo.push(`disabled\\:${c.replace(/\s{/, ':disabled {')}`)
+	classesWithPseudo.push(
+		withLayer(
+			layers.pseudo,
+			'.' + `disabled\\:${c.replace(/\s{/, ':disabled {')}`,
+		),
+	)
+	return classesWithPseudo
+}
+
 export const withModifiers = (classes) =>
 	[classes]
 		.flat()
 		.reduce(withImportant, [])
+		.reduce(withPseudo, [])
 		.map(
 			(c) =>
+				c +
 				withLayer(layers.utils, '.' + c) +
 				withLayer(
 					layers.screens,

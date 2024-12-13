@@ -2,26 +2,35 @@ import { utilsStyle } from '/src/utils/helpers/style'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { isScreen } from '/src/utils/helpers/screen'
 import { mounted } from '/src/utils/helpers/component'
+import { config } from '/src/assets/config'
+import { nextTick } from '/src/utils/helpers/next-tick'
 import { keys } from './config'
-import { hasSlider, SliderBus } from './bus'
+import { SliderBus } from './bus'
+import { store } from './store'
 
 class Slider extends HTMLElement {
 	#bus
 	constructor() {
 		super()
-		if (hasSlider.call(this)) {
+		if (store.props(this.getAttribute(keys.id))) {
 			return console.error(
 				`Duplicate ${keys.id}: ${this.getAttribute(keys.id)}`,
 			)
 		}
 
 		this.#bus = new SliderBus(this.getAttribute(keys.id), this)
-		mounted.call(this, [this.#render, this.#emit, this.#update])
+		mounted.call(this, [
+			this.#render,
+			this.#emit,
+			this.#update,
+			this.#onTransition,
+		])
 	}
 
 	// emit
 	#emit = () => {
 		this.#bus.emit('update', this.#update)
+		this.#bus.emit('force-update', this.#forceUpdate)
 	}
 
 	// node
@@ -44,24 +53,26 @@ class Slider extends HTMLElement {
 		)
 	}
 
-	#child(child, childIdx) {
+	#child = (child, childIdx) => {
 		const width = `calc(100% / ${this.#cols} - 1.25rem * ${this.#cols - 1} / ${this.#cols})`
 		return `
-<div id='child-${childIdx}' class="flex flex-col items-center" style="min-width: ${width}; width: ${width}">
+<div id='child-${childIdx}' class="flex flex-col items-center" style="min-width: ${width}; max-width: ${width}">
 	${child.innerHTML}
 </div>`
 	}
+	#childrenSlot = (shiftNumber = 0) => {
+		return this.#children.reduce(
+			(slot, child, childIdx) => `
+${slot}
+${this.#child(child, childIdx + shiftNumber)}`,
+			'',
+		)
+	}
 	get #slot() {
 		return (
-			this.#child(this.#children.at(-1), -1) +
-			this.#children.reduce(
-				(slot, child, childIdx) => `
-${slot}
-${this.#child(child, childIdx)}
-`,
-				'',
-			) +
-			this.#child(this.#children.at(0), this.#children.length)
+			this.#childrenSlot(-this.#children.length) +
+			this.#childrenSlot() +
+			this.#childrenSlot(this.#children.length)
 		)
 	}
 	#render = () => {
@@ -93,10 +104,22 @@ ${utilsStyle()}
 	get #sliderStyle() {
 		return `
 max-width: ${this.#containerWidth}px;
-transform: translate3d(${this.#sliderShift}px, 0px, 0);`
+transform: translate(${this.#sliderShift}px, 0px);`
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
+	}
+	#onTransition = () => {
+		this.#node.slider.classList.add('transition')
+	}
+	#offTransition = () => {
+		this.#node.slider.classList.remove('transition')
+	}
+	#forceUpdate = () => {
+		nextTick(
+			[this.#offTransition, this.#update, this.#onTransition],
+			config.vars['animation-duration'].value,
+		)
 	}
 }
 customElements.define('a-slider', Slider)

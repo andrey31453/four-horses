@@ -3,7 +3,8 @@ import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/component'
 import { callback } from '/src/composables/callback'
 import { keys } from './config'
-import { hasSlider, SliderBus } from './bus'
+import { SliderBus } from './bus'
+import { store } from './store'
 
 class SliderControls extends HTMLElement {
 	#bus
@@ -24,7 +25,7 @@ class SliderControls extends HTMLElement {
 				`Don't correct slider-id: ${this.getAttribute(keys.id)}`,
 			)
 		}
-		if (!hasSlider.call(this)) {
+		if (!store.props(this.getAttribute(keys.id))) {
 			this.#mounted.quantity++
 			return setTimeout(this.#safeMount.bind(this), 10)
 		}
@@ -60,16 +61,26 @@ class SliderControls extends HTMLElement {
 <button
 	is="a-button"
 	id="prev"
+	a-icon
 	a-name="${this.getAttribute(keys.id)}-prev"
+	class="!text-white"
 >
-	prev
+	<a-icon
+		a-icon="chevron-right"
+		class="size-4 rotate-180"
+	></a-icon>
 </button>
 <button
 	is="a-button"
 	id="next"
+	a-icon
 	a-name="${this.getAttribute(keys.id)}-next"
+	class="!text-white"
 >
-	next
+	<a-icon
+		a-icon="chevron-right"
+		class="size-4"
+	></a-icon>
 </button>`
 	}
 	#render = () => {
@@ -87,10 +98,6 @@ ${utilsStyle()}
 	}
 
 	// update
-	#update = () => {
-		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
-		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
-	}
 	#prev = () => {
 		this.#bus.prev()
 		this.#bus.on('update')
@@ -98,6 +105,10 @@ ${utilsStyle()}
 	#next = () => {
 		this.#bus.next()
 		this.#bus.on('update')
+	}
+	#update = () => {
+		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
+		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
 	}
 }
 customElements.define('a-slider-controls', SliderControls)

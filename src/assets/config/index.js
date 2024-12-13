@@ -8,7 +8,7 @@ export const config = {
 	},
 
 	sizes: {
-		decreasedQuantity: 8,
+		decreasedQuantity: 10,
 		baseQuantity: 20,
 		increasedQuantity: 100,
 	},
@@ -52,6 +52,7 @@ export const config = {
 		white: '#ffffff',
 		black: '#313131',
 		red: '#f54932',
+		yellow: '#fbce51',
 		blue: '#3057a2',
 
 		primary: '#f54932',
@@ -65,14 +66,12 @@ export const config = {
 		'secondary-700': '#d0d0d0',
 		'secondary-800': '#d5d5d5',
 		'secondary-900': '#e9ded4',
-
-		// btn vars
-		btn: '#313131',
-		'btn-hover': '#fbce51',
-		'btn-disabled': '#d6d6d6',
 	},
 
 	vars: {
-		'animation-time': 200,
+		'animation-duration': {
+			value: 100,
+			measurement: 'ms',
+		},
 	},
 }
