@@ -3,7 +3,7 @@ import { defineShadow } from '@/utils/helpers/shadow'
 import { mounted } from '@/utils/helpers/component'
 import { callback } from '@/composables/callback'
 import { keys } from './config'
-import { hasSlider, SliderBus, errorMessage } from './utils'
+import { hasSlider } from './bus'
 
 class SliderControls extends HTMLElement {
 	#bus
@@ -20,7 +20,9 @@ class SliderControls extends HTMLElement {
 	}
 	#safeMount() {
 		if (this.#mounted.quantity >= this.#mounted.max) {
-			return errorMessage.call(this)
+			return console.error(
+				`Don't correct slider-id: ${this.getAttribute(keys.id)}`,
+			)
 		}
 		if (!hasSlider.call(this)) {
 			this.#mounted.quantity++

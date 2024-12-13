@@ -1,24 +1,12 @@
 import { keys } from './config'
-import { deepCopy } from '../../utils/helpers/deep'
 
 export const hasSlider = function () {
 	return props.has(this.getAttribute(keys.id))
 }
 
-export const errorMessage = function () {
-	console.error(`Don't correct slider-id: ${this.getAttribute(keys.id)}`)
-}
-
-const defineState = function (state) {
-	state.disabled = {
-		prev: state.slide.current === state.slide.min,
-		next: state.slide.current === state.slide.max,
-	}
-	return state
-}
 const defineInitialState = function (id, ctx) {
 	return props.get(id).infinity
-		? defineState({
+		? {
 				slide: {
 					current: 0,
 					quantity: [...ctx.children].length - 1,
@@ -26,8 +14,8 @@ const defineInitialState = function (id, ctx) {
 					max: [...ctx.children].length,
 				},
 				ctx,
-			})
-		: defineState({
+			}
+		: {
 				slide: {
 					current: 0,
 					quantity: [...ctx.children].length - 1,
@@ -35,7 +23,7 @@ const defineInitialState = function (id, ctx) {
 					max: [...ctx.children].length - 1,
 				},
 				ctx,
-			})
+			}
 }
 const defineProps = function (ctx) {
 	return {
@@ -51,7 +39,7 @@ const defineProps = function (ctx) {
 //
 
 const props = new Map()
-const state = new Map()
+const state = {}
 const cbs = []
 
 export class SliderBus {
@@ -62,15 +50,22 @@ export class SliderBus {
 		if (!ctx) return
 
 		props.set(id, defineProps(ctx))
-		state.set(id, defineInitialState(id, ctx))
+		state[id] = defineInitialState(id, ctx)
+		this.#defineState()
 		this.#initAutoChange()
 	}
 
+	#defineState = () => {
+		this.state.disabled = {
+			prev: this.state.slide.current === this.state.slide.min,
+			next: this.state.slide.current === this.state.slide.max,
+		}
+	}
 	get props() {
 		return props.get(this.#id)
 	}
 	get state() {
-		return state.get(this.#id)
+		return state[this.#id]
 	}
 
 	// cbs
@@ -89,9 +84,11 @@ export class SliderBus {
 
 	// changes state
 	prev = () => {
-		const currentState = deepCopy(this.state)
-		currentState.slide.current--
-		state.set(this.#id, defineState(currentState))
+		clearTimeout(this.state.timeout)
+		this.#autoChange()
+
+		this.state.slide.current--
+		this.#defineState()
 	}
 	next = (auto) => {
 		if (!auto) {
@@ -99,22 +96,17 @@ export class SliderBus {
 			this.#autoChange()
 		}
 
-		const currentState = deepCopy(this.state)
-		currentState.slide.current++
-		state.set(this.#id, defineState(currentState))
+		this.state.slide.current++
+		this.#defineState()
 	}
 
 	// auto change
 	#autoChange = () => {
-		const timeout = setTimeout(() => {
+		this.state.timeout = setTimeout(() => {
 			this.next(true)
 			this.on('update')
 			this.#autoChange()
 		}, 1000 * this.props.autoChange)
-
-		const currentState = deepCopy(this.state)
-		currentState.timeout = timeout
-		state.set(this.#id, defineState(currentState))
 	}
 	#initAutoChange = () => {
 		if (!this.props.autoChange) {

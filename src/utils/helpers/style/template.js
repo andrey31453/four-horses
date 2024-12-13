@@ -18,5 +18,7 @@ const _templateStyle = withModifiers([
 	'line-through {text-decoration-line: line-through;}',
 
 	'invisible {visibility: hidden;}',
+
+	'disabled {pointer-events:none;cursor:not-allowed;}',
 ])
 export const templateStyle = withLayer(layers.utils, _templateStyle)

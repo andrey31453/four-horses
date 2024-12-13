@@ -3,7 +3,7 @@ import { defineShadow } from '@/utils/helpers/shadow'
 import { isScreen } from '@/utils/helpers/screen'
 import { mounted } from '@/utils/helpers/component'
 import { keys } from './config'
-import { hasSlider, SliderBus } from './utils'
+import { hasSlider, SliderBus } from './bus'
 
 class Slider extends HTMLElement {
 	#bus

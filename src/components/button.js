@@ -1,6 +1,8 @@
 import { callback } from '@/composables/callback'
 
 class Button extends HTMLButtonElement {
+	static observedAttributes = ['a-disabled']
+
 	constructor() {
 		super()
 		this.#on()
@@ -13,6 +15,12 @@ class Button extends HTMLButtonElement {
 			name: this.getAttribute('a-name'),
 			props: this.getAttribute('a-prop'),
 		})
+	}
+
+	attributeChangedCallback(name, oldValue, newValue) {
+		newValue === 'true'
+			? this.classList.add('disabled')
+			: this.classList.remove('disabled')
 	}
 }
 customElements.define('a-button', Button, {
