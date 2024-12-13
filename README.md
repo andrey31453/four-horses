@@ -22,7 +22,7 @@
 Здравствуйте. Cсылки на тестовое:
 
 - github https://github.com/andrey31453/four-horses
-- демка https://andrey31453.github.io/four-horses/
+- демка https://andrey31453.github.io/four-horses
 
 1. Программы
 
