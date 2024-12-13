@@ -1,4 +1,4 @@
-import { config } from 'src/assets/config'
+import { config } from '/src/assets/config'
 import { isScreen } from '../utils/helpers/screen'
 
 const setScreenClass = () => {

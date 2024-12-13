@@ -1,4 +1,4 @@
-import { config } from 'src/assets/config'
+import { config } from '/src/assets/config'
 
 export const isScreen = (key) => {
 	if (config.screens[key] === undefined) {

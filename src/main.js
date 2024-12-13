@@ -1,16 +1,16 @@
-import { bootstrap } from 'src/composables/bootstrap'
-import { emptySection } from 'src/utils/helpers/empty-section'
-import { defineTemplate } from 'src/utils/helpers/template'
-import { utilsStyle } from 'src/utils/helpers/style'
-import { useScreenClass } from 'src/composables/screenClass'
+import { bootstrap } from '/src/composables/bootstrap'
+import { emptySection } from '/src/utils/helpers/empty-section'
+import { defineTemplate } from '/src/utils/helpers/template'
+import { utilsStyle } from '/src/utils/helpers/style'
+import { useScreenClass } from '/src/composables/screenClass'
 
-import header from 'src/templates/header.html?raw'
-import support from 'src/templates/support.html?raw'
-import about from 'src/templates/about.html?raw'
-import stages from 'src/templates/stages.html?raw'
-import footer from 'src/templates/footer.html?raw'
-import runningLine from 'src/templates/running-line.html?raw'
-import participants from 'src/templates/participants.html?raw'
+import header from '/src/templates/header.html?raw'
+import support from '/src/templates/support.html?raw'
+import about from '/src/templates/about.html?raw'
+import stages from '/src/templates/stages.html?raw'
+import footer from '/src/templates/footer.html?raw'
+import runningLine from '/src/templates/running-line.html?raw'
+import participants from '/src/templates/participants.html?raw'
 
 bootstrap()
 	.use(useScreenClass)

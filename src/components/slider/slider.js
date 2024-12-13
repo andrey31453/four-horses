@@ -1,7 +1,7 @@
-import { utilsStyle } from 'src/utils/helpers/style'
-import { defineShadow } from 'src/utils/helpers/shadow'
-import { isScreen } from 'src/utils/helpers/screen'
-import { mounted } from 'src/utils/helpers/component'
+import { utilsStyle } from '/src/utils/helpers/style'
+import { defineShadow } from '/src/utils/helpers/shadow'
+import { isScreen } from '/src/utils/helpers/screen'
+import { mounted } from '/src/utils/helpers/component'
 import { keys } from './config'
 import { hasSlider, SliderBus } from './bus'
 
