@@ -32,7 +32,7 @@ class Store {
 	}
 	#defineProps = (id, ctx) => {
 		_store.props[id] = {
-			'controls-variant': ctx.getAttribute('controls-variant') ?? 'dotted',
+			'controls-variant': ctx.getAttribute('controls-variant') ?? 'dots',
 			infinity: ctx.getAttribute('infinity') !== null,
 			'auto-change': +ctx.getAttribute('auto-change'),
 			slides: JSON.parse(ctx.getAttribute('slides') ?? null) || {

@@ -57,8 +57,15 @@ class SliderControls extends HTMLElement {
 	}
 
 	// render
-	#dotted = () => {
-		return `dotted`
+	#dot = (i) => {
+		return `
+<div class="js__dot size-2.5 rounded-full ${i === this.#bus.state.slide.current ? 'bg-black' : 'bg-secondary-800'}"></div>`
+	}
+	#dots = () => {
+		return `
+<div class="flex justify-center items-center gap-1.5 text-golos transition">
+	${[...Array(this.#bus.state.slide.quantity).keys()].map(this.#dot).join('')}
+</div>`
 	}
 	#fixSlideCurrent = (slideCurrent) => {
 		if (slideCurrent < 0) {
@@ -86,7 +93,7 @@ class SliderControls extends HTMLElement {
 	get #slideInfo() {
 		return (
 			{
-				dotted: this.#dotted,
+				dots: this.#dots,
 				decimal: this.#decimal,
 			}[this.#bus.props['controls-variant']]() ?? ''
 		)

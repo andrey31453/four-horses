@@ -53,6 +53,7 @@ const createBaseSizeClasses = (baseQuantity) =>
 	[...Array(baseQuantity + 1).keys()].reduce((classes, size) => {
 		classes.push(positionClass(withoutHalf(size)))
 		classes.push(gapClass(withoutHalf(size)))
+		classes.push(gapClass(withHalf(size)))
 		classes.push(paddingClass(withHalf(size)))
 		classes.push(paddingClass(withoutHalf(size)))
 		classes.push(marginClass(withoutHalf(size)))
