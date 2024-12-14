@@ -1,6 +1,5 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
-import { mounted } from '/src/utils/helpers/component'
 import { windowCallback } from '/src/composables/callback'
 import { keys } from './config'
 import { SliderBus } from './bus'
@@ -24,8 +23,6 @@ class SliderControls extends HTMLElement {
 		if (this.#mountedConf.quantity >= this.#mountedConf.max) {
 			return console.error(`Don't correct a-id: ${this.getAttribute(keys.id)}`)
 		}
-		console.log(this.getAttribute(keys.id))
-		console.log(store.props(this.getAttribute(keys.id)))
 		if (!store.props(this.getAttribute(keys.id))) {
 			this.#mountedConf.quantity++
 			await delay()
@@ -34,7 +31,6 @@ class SliderControls extends HTMLElement {
 		this.#mounted()
 	}
 	#mounted = async () => {
-		console.log(mounted)
 		this.#bus = new SliderBus(this.getAttribute(keys.id))
 		this.#render()
 		this.#emit()
@@ -50,6 +46,7 @@ class SliderControls extends HTMLElement {
 			prev: this.shadowRoot.getElementById('prev'),
 			next: this.shadowRoot.getElementById('next'),
 			decimal: this.shadowRoot.getElementById('decimal'),
+			dots: this.shadowRoot.querySelectorAll('.js__dot'),
 		}
 	}
 
@@ -69,7 +66,7 @@ class SliderControls extends HTMLElement {
 	// render
 	#dot = (i) => {
 		return `
-<div class="js__dot size-2.5 rounded-full ${i === this.#bus.state.slide.current ? 'bg-black' : 'bg-secondary-800'}"></div>`
+<div class="js__dot size-2.5 rounded-full bg-secondary-800"></div>`
 	}
 	#dots = () => {
 		return `
@@ -166,7 +163,13 @@ ${styleLink()}`,
 
 		this.#node.decimal.innerHTML = `${this.#slideCurrent}`
 	}
-	#updateDotted = () => {}
+	#updateDotted = () => {
+		this.#node.dots.forEach((item, idx) => {
+			idx === this.#bus.state.slide.current
+				? item.classList.add('!bg-black')
+				: item.classList.remove('!bg-black')
+		})
+	}
 	#update = () => {
 		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
 		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)

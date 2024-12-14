@@ -35,7 +35,6 @@ class Stages extends HTMLElement {
 </div>`
 	}
 	#render() {
-		console.log(this.clientWidth)
 		defineShadow.call(
 			this,
 			`
