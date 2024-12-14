@@ -72,7 +72,7 @@ class Button extends HTMLButtonElement {
 			this.#domClasses,
 			stateClasses.join(' '),
 		].join(' ')
-	}k
+	}
 	#setDisabled = (name, value) => {
 		if (name !== 'a-disabled') return
 		value === 'true'
