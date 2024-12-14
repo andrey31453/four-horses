@@ -1,6 +1,6 @@
 import { throttle } from '/src/utils/helpers/debounce'
 
-const ons = []
+let ons = []
 export const callback = {
 	emit: (options) => {
 		ons.push(options)
@@ -14,5 +14,8 @@ export const callback = {
 					.forEach(({ cb }) => cb(props ?? null))
 			}),
 		)
+	},
+	off: (name) => {
+		ons = ons.filter((on) => on.name !== name)
 	},
 }

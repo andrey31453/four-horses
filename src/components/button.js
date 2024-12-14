@@ -72,7 +72,7 @@ class Button extends HTMLButtonElement {
 			this.#domClasses,
 			stateClasses.join(' '),
 		].join(' ')
-	}
+	}k
 	#setDisabled = (name, value) => {
 		if (name !== 'a-disabled') return
 		value === 'true'
@@ -82,6 +82,9 @@ class Button extends HTMLButtonElement {
 	attributeChangedCallback(name, oldValue, newValue) {
 		this.#setDisabled(name, newValue)
 		this.#update()
+	}
+	disconnectedCallback() {
+		callback.off(this.getAttribute('a-name'))
 	}
 }
 customElements.define('a-button', Button, {

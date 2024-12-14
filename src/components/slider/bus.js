@@ -30,7 +30,7 @@ export class SliderBus {
 				this.on('force-update')
 			})
 		}
-		if (this.state.slide.current > this.state.slide.quantity) {
+		if (this.state.slide.current > this.state.slide.quantity - 1) {
 			nextTick(() => {
 				this.state.slide.current =
 					this.state.slide.current - this.state.slide.quantity

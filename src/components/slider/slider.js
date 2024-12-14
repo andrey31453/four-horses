@@ -54,7 +54,7 @@ class Slider extends HTMLElement {
 	}
 
 	#child = (child, childIdx) => {
-		const width = `calc(100% / ${this.#cols} - 1.25rem * ${this.#cols - 1} / ${this.#cols})`
+		const width = `${this.#slideWidth}px`
 		return `
 <div id='child-${childIdx}' class="flex flex-col items-center" style="min-width: ${width}; max-width: ${width}">
 	${child.innerHTML}
@@ -90,19 +90,24 @@ ${styleLink()}`,
 	}
 
 	// update
+	get #slideWidth() {
+		return (
+			this.#containerWidth / this.#cols - (20 * (this.#cols - 1)) / this.#cols
+		)
+	}
 	get #containerWidth() {
-		return this.closest('*:not(a-slider-content)').offsetWidth
+		const containerPadding = getComputedStyle(this.closest('a-container'))[
+			'padding-left'
+		].replace('px', '')
+		return this.closest('*:not(a-slider)').offsetWidth - 2 * containerPadding
 	}
 	get #sliderShift() {
-		return (
-			-(this.#bus.state.slide.current + 1) *
-			(this.#node.zeroChild.offsetWidth + 20)
-		)
+		return -(this.#bus.state.slide.current + 1) * (this.#slideWidth + 20)
 	}
 	get #sliderStyle() {
 		return `
 max-width: ${this.#containerWidth}px;
-transform: translate(${this.#sliderShift}px, 0px);`
+transform: translate(${this.#sliderShift}px, 0);`
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
