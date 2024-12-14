@@ -1,7 +1,7 @@
 import logo from '/src/assets/icons/logo.svg?raw'
 import chevronRight from '/src/assets/icons/chevron-right.svg?raw'
-import { defineShadow } from '../utils/helpers/shadow'
-import { utilsStyle } from '../utils/helpers/style'
+import { defineShadow } from '/src/utils/helpers/shadow'
+import { styleLink } from '/src/utils/helpers/style-link'
 
 const icons = {
 	'chevron-right': chevronRight,
@@ -20,9 +20,8 @@ class Icon extends HTMLElement {
 			`
 ${icon}
 
+${styleLink()}
 <style>
-${utilsStyle()}
-
 svg {
 	display: block;
 	max-width: 100%;

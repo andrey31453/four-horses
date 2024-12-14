@@ -1,4 +1,4 @@
-import { utilsStyle } from '/src/utils/helpers/style'
+import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { isScreen } from '/src/utils/helpers/screen'
 import { mounted } from '/src/utils/helpers/component'
@@ -85,9 +85,7 @@ ${this.#child(child, childIdx + shiftNumber)}`,
 	</div>
 </div>
 
-<style>
-${utilsStyle()}
-</style>`,
+${styleLink()}`,
 		)
 	}
 

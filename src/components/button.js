@@ -55,13 +55,13 @@ class Button extends HTMLButtonElement {
 	#update = () => {
 		let stateClasses = []
 		Object.entries(propsConfig).forEach(([key, value]) => {
-			const prop = this.getAttribute(key)
+			const prop = this.getAttribute(key) === '' || this.getAttribute(key)
 			const [_, classes] =
-				Object.entries(value).find(([key]) => key === prop) ||
+				Object.entries(value).find(([key]) => key === String(prop)) ||
 				Object.entries(value)[0]
 			classes &&
 				[classes]
-					.flat()
+					.flat(Infinity)
 					.join(' ')
 					.split(' ')
 					.forEach((c) => stateClasses.push(c))

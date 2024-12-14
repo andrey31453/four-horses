@@ -1,7 +1,7 @@
 import { bootstrap } from '/src/composables/bootstrap'
 import { emptySection } from '/src/utils/helpers/empty-section'
 import { defineTemplate } from '/src/utils/helpers/template'
-import { utilsStyle } from '/src/utils/helpers/style'
+import { styleLink } from '/src/utils/helpers/style-link'
 import { useScreenClass } from '/src/composables/screenClass'
 
 import header from '/src/templates/header.html?raw'
@@ -14,7 +14,12 @@ import participants from '/src/templates/participants.html?raw'
 
 bootstrap()
 	.use(useScreenClass)
-	.template(defineTemplate('style', null, utilsStyle()))
+	.template(
+		defineTemplate('link', {
+			href: 'src/assets/styles/a-style.css',
+			rel: 'stylesheet',
+		}),
+	)
 	.template(
 		defineTemplate(
 			'div',

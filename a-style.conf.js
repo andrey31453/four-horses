@@ -75,5 +75,18 @@ export const config = {
 		},
 	},
 
-	content:['']
+	content: [
+		'./index.html',
+		'./src/main.js',
+		'./src/components',
+		'./src/templates',
+	],
+	safeList: [...Array(12).keys()]
+		.map((i) => [
+			`md:grid-cols-${i + 1}`,
+			`grid-cols-${i + 1}`,
+			`col-span-${i + 1}`,
+			`row-span-${i + 1}`,
+		])
+		.flat(),
 }

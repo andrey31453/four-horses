@@ -3,6 +3,7 @@ const _store = {
 	state: {},
 	cbs: {},
 }
+
 class Store {
 	props = (id) => _store.props[id]
 	state = (id) => _store.state[id]
@@ -31,10 +32,15 @@ class Store {
 	}
 	#defineProps = (id, ctx) => {
 		_store.props[id] = {
-			controlsVariant: ctx.getAttribute('controls-variant') ?? 'base',
+			'controls-variant': ctx.getAttribute('controls-variant') ?? 'dotted',
 			infinity: ctx.getAttribute('infinity') !== null,
-			autoChange: +ctx.getAttribute('auto-change'),
-			slides: JSON.parse(ctx.getAttribute('slides') ?? {}),
+			'auto-change': +ctx.getAttribute('auto-change'),
+			slides: JSON.parse(ctx.getAttribute('slides') ?? null) || {
+				xs: 1,
+				sm: 2,
+				md: 3,
+				xl: 4,
+			},
 		}
 	}
 	#defineState = (id, ctx) => {

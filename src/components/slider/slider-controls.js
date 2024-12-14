@@ -1,4 +1,4 @@
-import { utilsStyle } from '/src/utils/helpers/style'
+import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/component'
 import { callback } from '/src/composables/callback'
@@ -91,9 +91,7 @@ class SliderControls extends HTMLElement {
 	${this.#slot}
 </div>
 
-<style>
-${utilsStyle()}
-</style>`,
+${styleLink()}`,
 		)
 	}
 

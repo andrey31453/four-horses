@@ -1,4 +1,4 @@
-import { layers, withLayer } from './layers'
+import { layers, withLayer } from './layers.js'
 
 const _scrollStyle = `
 ::-webkit-scrollbar {

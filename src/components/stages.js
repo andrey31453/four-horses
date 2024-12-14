@@ -1,4 +1,4 @@
-import { utilsStyle } from '/src/utils/helpers/style'
+import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { debounce } from '/src/utils/helpers/debounce'
 import { isScreen } from '../utils/helpers/screen'
@@ -93,10 +93,10 @@ class Stages extends HTMLElement {
 			`
 ${isScreen('md') ? new DesktopStages(this.children, { cols: this.getAttribute('cols') || this.#default_options.cols }).innerHTML : new MobileStages(this.children).innerHTML}
 
-<style>
-${utilsStyle()}
-</style>`,
+${styleLink()}`,
 		)
 	}
 }
 customElements.define('a-stages', Stages)
+
+const safeList = ['']

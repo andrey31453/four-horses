@@ -1,4 +1,4 @@
-import { utilsStyle } from '/src/utils/helpers/style'
+import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { debounce } from '/src/utils/helpers/debounce'
 
@@ -35,9 +35,9 @@ ${slot}
 		.join('')}
 </div>
 
-<style>
-${utilsStyle()}
+${styleLink()}
 
+<style>
 .marquee-item {
   transition: all var(--animation-duration) ease-in-out;
 }
