@@ -4,6 +4,7 @@ export const minimizeCSS = (string) =>
 		.replace(/}\s/g, '}')
 		.replace(/\s{/g, '{')
 		.replace(/:\s/g, ':')
+		.replace(/and/g, 'and ')
 
 export const minimize = (string) =>
 	string

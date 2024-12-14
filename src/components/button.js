@@ -1,4 +1,4 @@
-import { callback } from '/src/composables/callback'
+import { windowCallback } from '/src/composables/callback'
 
 const defaultClasses =
 	'text-golos font-medium transition flex justify-center items-center cursor-pointer'
@@ -44,7 +44,7 @@ class Button extends HTMLButtonElement {
 	}
 
 	#emit = () => {
-		callback.on({
+		windowCallback.on({
 			target: this,
 			type: this.getAttribute('a-type'),
 			name: this.getAttribute('a-name'),
@@ -83,8 +83,13 @@ class Button extends HTMLButtonElement {
 		this.#setDisabled(name, newValue)
 		this.#update()
 	}
+
 	disconnectedCallback() {
-		callback.off(this.getAttribute('a-name'))
+		windowCallback.off(this.getAttribute('a-name'))
+	}
+
+	assignedSlot() {
+		console.log('assignedSlot')
 	}
 }
 customElements.define('a-button', Button, {

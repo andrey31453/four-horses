@@ -1,4 +1,4 @@
-import { callback } from '/src/composables/callback'
+import { windowCallback } from '/src/composables/callback'
 
 class Participant extends HTMLElement {
 	constructor() {
@@ -8,7 +8,7 @@ class Participant extends HTMLElement {
 	}
 
 	#emit = () => {
-		callback.emit({
+		windowCallback.emit({
 			name: 'participant-goTo',
 			cb: this.#goTo,
 		})

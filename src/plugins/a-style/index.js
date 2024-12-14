@@ -37,6 +37,8 @@ export class AStyle {
 		cLasses.map((c) =>
 			classesMap[c]
 				.replace(/:/g, '\\:')
+				.replace(/!/g, '\\!')
+				.replace(/ \\!/g, ' !')
 				.replace(/\\: /g, ':')
 				.replace(/\\:hover{/g, ':hover{')
 				.replace(/\\:hover /g, ':hover')

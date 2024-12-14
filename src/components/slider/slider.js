@@ -10,6 +10,7 @@ import { store } from './store'
 
 class Slider extends HTMLElement {
 	#bus
+	#unMounted
 	constructor() {
 		super()
 		if (store.props(this.getAttribute(keys.id))) {
@@ -17,14 +18,22 @@ class Slider extends HTMLElement {
 				`Duplicate ${keys.id}: ${this.getAttribute(keys.id)}`,
 			)
 		}
-
+		this.#mounted()
+	}
+	#initBus = () => {
 		this.#bus = new SliderBus(this.getAttribute(keys.id), this)
-		mounted.call(this, [
+	}
+	#mounted = async () => {
+		this.#unMounted = await mounted.call(this, [
+			this.#initBus,
 			this.#render,
 			this.#emit,
 			this.#update,
 			this.#onTransition,
 		])
+	}
+	disconnectedCallback() {
+		this.#unMounted()
 	}
 
 	// emit

@@ -1,3 +1,3 @@
 export const keys = {
-	id: 'slider-id',
+	id: 'a-id',
 }

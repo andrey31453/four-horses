@@ -1,4 +1,8 @@
-const initialClasses = ['w-full{width: 100%}', 'max-w-full{width: 100%}']
+const initialClasses = [
+	'w-full{width: 100%}',
+	'max-w-full{width: 100%}',
+	'h-full{height: 100%}',
+]
 
 const sizeClass = ({ name, remSize }) => [
 	`size-${name} {width: ${remSize}rem;height: ${remSize}rem;}`,

@@ -25,9 +25,19 @@ export const withGeneratingLayer = (classes) =>
 				const screenValue = config.screens[currentScreen]
 				return withLayer(
 					layers.screens,
-					`
-@media not all and (min-width: ${screenValue}px) {.max-${c}}
-@media (min-width: ${screenValue}px) {.${c}}`,
+					`@media (min-width: ${screenValue}px) {.${c}}`,
+				)
+			}
+
+			const backCurrentScreen = Object.keys(config.screens)
+				.find((screen) => c.startsWith('max-' + screen))
+				?.replace(/\\:/, '')
+				.replace(/max-/, '')
+			if (backCurrentScreen) {
+				const screenValue = config.screens[backCurrentScreen]
+				return withLayer(
+					layers.screens,
+					`@media not all and (min-width: ${screenValue}px) {.${c}}`,
 				)
 			}
 

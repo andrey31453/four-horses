@@ -1,37 +1,47 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/component'
-import { callback } from '/src/composables/callback'
+import { windowCallback } from '/src/composables/callback'
 import { keys } from './config'
 import { SliderBus } from './bus'
 import { store } from './store'
+import { delay } from '../../utils/helpers/delay.js'
 
 class SliderControls extends HTMLElement {
 	#bus
-
+	#unMounted
 	constructor() {
 		super()
-		this.#safeMount()
+		this.#sliderMounted()
 	}
 
-	// safe mount after mount Slider
-	#mounted = {
+	// safe mount after mount slider
+	#mountedConf = {
 		quantity: 0,
 		max: 100,
 	}
-	#safeMount() {
-		if (this.#mounted.quantity >= this.#mounted.max) {
-			return console.error(
-				`Don't correct slider-id: ${this.getAttribute(keys.id)}`,
-			)
+	async #sliderMounted() {
+		if (this.#mountedConf.quantity >= this.#mountedConf.max) {
+			return console.error(`Don't correct a-id: ${this.getAttribute(keys.id)}`)
 		}
+		console.log(this.getAttribute(keys.id))
+		console.log(store.props(this.getAttribute(keys.id)))
 		if (!store.props(this.getAttribute(keys.id))) {
-			this.#mounted.quantity++
-			return setTimeout(this.#safeMount.bind(this), 10)
+			this.#mountedConf.quantity++
+			await delay()
+			return this.#sliderMounted(this)
 		}
-
+		this.#mounted()
+	}
+	#mounted = async () => {
+		console.log(mounted)
 		this.#bus = new SliderBus(this.getAttribute(keys.id))
-		mounted.call(this, [this.#render, this.#emit, this.#update])
+		this.#render()
+		this.#emit()
+		this.#update()
+	}
+	disconnectedCallback() {
+		this.#unMounted()
 	}
 
 	// node
@@ -45,11 +55,11 @@ class SliderControls extends HTMLElement {
 
 	// emit
 	#emit = () => {
-		callback.emit({
+		windowCallback.emit({
 			name: `${this.getAttribute(keys.id)}-prev`,
 			cb: this.#prev,
 		})
-		callback.emit({
+		windowCallback.emit({
 			name: `${this.getAttribute(keys.id)}-next`,
 			cb: this.#next,
 		})
@@ -100,7 +110,7 @@ class SliderControls extends HTMLElement {
 	}
 	get #slot() {
 		return `
-<div class="flex justify-end items-center gap-4">
+<div class="flex items-center gap-4">
 	<button
 		is="a-button"
 		id="prev"
@@ -132,7 +142,7 @@ class SliderControls extends HTMLElement {
 		defineShadow.call(
 			this,
 			`
-<div class="flex flex-center items-center gap-4">
+<div class="h-full flex justify-center md:justify-end items-center gap-4">
 	${this.#slot}
 </div>
 

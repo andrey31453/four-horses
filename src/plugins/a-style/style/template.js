@@ -2,6 +2,9 @@ export const templateClasses = [
 	'block {display: block;}',
 	'hidden {display: none;}',
 
+	'visible {visibility: visible;}',
+	'invisible {visibility: hidden;}',
+
 	'static {position: static;}',
 	'relative {position: relative;}',
 	'absolute {position: absolute;}',

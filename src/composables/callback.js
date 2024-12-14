@@ -1,19 +1,32 @@
 import { throttle } from '/src/utils/helpers/debounce'
 
-let ons = []
-export const callback = {
+let windowOns = []
+export const windowCallback = {
 	emit: (options) => {
-		ons.push(options)
+		windowOns.push(options)
 	},
 	on: ({ target, name, props, type }) => {
 		target.addEventListener(
 			type ?? 'click',
 			throttle(() => {
-				ons
+				windowOns
 					.filter((on) => on.name === name)
 					.forEach(({ cb }) => cb(props ?? null))
 			}),
 		)
+	},
+	off: (name) => {
+		windowOns = windowOns.filter((on) => on.name !== name)
+	},
+}
+
+let ons = []
+export const callback = {
+	emit: (name, cb) => {
+		ons.push(name, cb)
+	},
+	on: (name, props) => {
+		ons.filter((on) => on.name === name).forEach(({ cb }) => cb(props))
 	},
 	off: (name) => {
 		ons = ons.filter((on) => on.name !== name)

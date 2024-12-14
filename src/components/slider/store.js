@@ -3,9 +3,12 @@ const _store = {
 	state: {},
 	cbs: {},
 }
-
+console.log(_store)
 class Store {
-	props = (id) => _store.props[id]
+	props = (id) => {
+		console.log(_store.props.stages)
+		return _store.props[id]
+	}
 	state = (id) => _store.state[id]
 	cbs = (id) => _store.cbs[id]
 

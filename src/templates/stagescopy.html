@@ -17,7 +17,8 @@
 		</div>
 		<!-- !title -->
 
-		<a-teleport a-id="stages">
+		<!-- data -->
+		<a-stages cols="3">
 			<div>Строительство железнодорожной магистрали Москва-Васюки</div>
 			<div>
 				Открытие фешенебельной гостиницы «Проходная пешка» и других небоскрёбов
@@ -37,22 +38,16 @@
 				самолётов и дирижаблей во все концы света, включая Лос-Анжелос
 				и Мельбурн
 			</div>
-		</a-teleport>
+		</a-stages>
+		<!-- !data -->
 
-		<a-stages
-			cols="3"
-			a-teleport-id="stages"
-			class="hidden md:!block"
-		></a-stages>
-
-		<a-slider
-			a-id="stages"
-			a-teleport-id="stages"
-			class="md:hidden"
-		></a-slider>
-		<a-slider-controls
-			a-id="stages"
-			class="md:hidden"
-		></a-slider-controls>
+		<a-slider a-id="stages1">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+		</a-slider>
+		<a-slider-controls a-id="stages1"></a-slider-controls>
 	</a-container>
 </section>

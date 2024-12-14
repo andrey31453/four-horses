@@ -37,7 +37,7 @@ bootstrap()
 				emptySection('h-30 md:h-50'),
 				stages,
 				emptySection('h-30 md:h-50'),
-				participants,
+				// participants,
 				emptySection('h-25 md:h-35'),
 				runningLine,
 				footer,
