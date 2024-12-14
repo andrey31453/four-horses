@@ -40,9 +40,11 @@ export class AStyle {
 				.replace(/!/g, '\\!')
 				.replace(/ \\!/g, ' !')
 				.replace(/\\: /g, ':')
-				.replace(/\\:hover{/g, ':hover{')
 				.replace(/\\:hover /g, ':hover')
-				.replace(/\\:disabled{/g, ':disabled{'),
+				.replace(/\\:hover{/g, ':hover{')
+				.replace(/\\:disabled/g, ':disabled ')
+				.replace(/\\:disabled  /g, ':disabled ')
+				.replace(/\\:disabled {/g, ':disabled {'),
 		)
 
 	generate = (link) => {
@@ -50,6 +52,10 @@ export class AStyle {
 		const useCLasses = this.#useCLasses(classesMap)
 		const shieldingClasses = this.#shieldingClasses(classesMap, useCLasses)
 		const layerClasses = withGeneratingLayer(shieldingClasses)
+
+		fs.writeFileSync('./useCLasses.css', useCLasses.join('\n'))
+		fs.writeFileSync('./shieldingClasses.css', shieldingClasses.join('\n'))
+		fs.writeFileSync('./layerClasses.css', layerClasses.join('\n'))
 
 		fs.writeFileSync(
 			link,

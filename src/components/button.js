@@ -30,7 +30,7 @@ const propsConfig = {
 	},
 	'a-disabled': {
 		false: '',
-		true: '!cursor-not-allowed pointer-events-none',
+		true: 'pointer-events-none',
 	},
 }
 class Button extends HTMLButtonElement {
