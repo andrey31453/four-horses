@@ -39,6 +39,7 @@ class SliderControls extends HTMLElement {
 		return {
 			prev: this.shadowRoot.getElementById('prev'),
 			next: this.shadowRoot.getElementById('next'),
+			decimal: this.shadowRoot.getElementById('decimal'),
 		}
 	}
 
@@ -56,32 +57,69 @@ class SliderControls extends HTMLElement {
 	}
 
 	// render
+	#dotted = () => {
+		return `dotted`
+	}
+	#fixSlideCurrent = (slideCurrent) => {
+		if (slideCurrent < 0) {
+			return this.#fixSlideCurrent(
+				slideCurrent + this.#bus.state.slide.quantity,
+			)
+		}
+		if (slideCurrent > this.#bus.state.slide.quantity - 1) {
+			return this.#fixSlideCurrent(
+				slideCurrent - this.#bus.state.slide.quantity,
+			)
+		}
+		return slideCurrent
+	}
+	get #slideCurrent() {
+		return this.#fixSlideCurrent(this.#bus.state.slide.current) + 1
+	}
+	#decimal = () => {
+		return `
+<div class="flex justify-center items-center text-golos">
+	<span id="decimal" class="transition">${this.#slideCurrent}</span>
+	<span class="text-secondary-800">/ ${this.#bus.state.slide.quantity}</span>
+</div>`
+	}
+	get #slideInfo() {
+		return (
+			{
+				dotted: this.#dotted,
+				decimal: this.#decimal,
+			}[this.#bus.props['controls-variant']]() ?? ''
+		)
+	}
 	get #slot() {
 		return `
-<button
-	is="a-button"
-	id="prev"
-	a-icon
-	a-name="${this.getAttribute(keys.id)}-prev"
-	class="!text-white"
->
-	<a-icon
-		a-icon="chevron-right"
-		class="size-4 rotate-180"
-	></a-icon>
-</button>
-<button
-	is="a-button"
-	id="next"
-	a-icon
-	a-name="${this.getAttribute(keys.id)}-next"
-	class="!text-white"
->
-	<a-icon
-		a-icon="chevron-right"
-		class="size-4"
-	></a-icon>
-</button>`
+<div class="flex justify-end items-center gap-4">
+	<button
+		is="a-button"
+		id="prev"
+		a-icon
+		a-name="${this.getAttribute(keys.id)}-prev"
+		class="!text-white"
+	>
+		<a-icon
+			a-icon="chevron-right"
+			class="size-4 rotate-180"
+		></a-icon>
+	</button>
+	${this.#slideInfo}
+	<button
+		is="a-button"
+		id="next"
+		a-icon
+		a-name="${this.getAttribute(keys.id)}-next"
+		class="!text-white"
+	>
+		<a-icon
+			a-icon="chevron-right"
+			class="size-4"
+		></a-icon>
+	</button>
+</div>`
 	}
 	#render = () => {
 		defineShadow.call(
@@ -104,9 +142,19 @@ ${styleLink()}`,
 		this.#bus.next()
 		this.#bus.on('update')
 	}
+	#updateDecimal = () => {
+		if (this.#bus.props['controls-variant'] !== 'decimal') {
+			return
+		}
+
+		this.#node.decimal.innerHTML = `${this.#slideCurrent}`
+	}
+	#updateDotted = () => {}
 	#update = () => {
 		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
 		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
+		this.#updateDecimal()
+		this.#updateDotted()
 	}
 }
 customElements.define('a-slider-controls', SliderControls)

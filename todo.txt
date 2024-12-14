@@ -3,4 +3,4 @@ TODO 'resize' таблицы и тд багует
 TODO add /**/ comment to props?
 TODO style plugin add max min to w & h
 TODO style plugin change hover & disabled => keys
-TODO rewrite style plugin
+TODO refactor style plugin

@@ -69,7 +69,7 @@ export class SliderBus {
 
 	// auto change
 	#resetAutoChange = () => {
-		if (!this.props.autoChange) return
+		if (!this.props['auto-change']) return
 
 		clearTimeout(this.state.timeout)
 		this.#autoChange()
@@ -79,10 +79,10 @@ export class SliderBus {
 			this.#_next()
 			this.on('update')
 			this.#autoChange()
-		}, 1000 * this.props.autoChange)
+		}, 1000 * this.props['auto-change'])
 	}
 	#initAutoChange = () => {
-		if (!this.props.autoChange) {
+		if (!this.props['auto-change']) {
 			return
 		}
 		if (!this.props.infinity) {
