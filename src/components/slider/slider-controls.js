@@ -70,12 +70,11 @@ class SliderControls extends HTMLElement {
 				slideCurrent - this.#bus.state.slide.quantity,
 			)
 		}
-		return slideCurrent
+		return slideCurrent + 1
 	}
 	get #slideCurrent() {
-		return (
-			this.#fixSlideCurrent(this.#bus.state.slide.current) +
-			this.#bus.state.slide.quantity
+		return this.#fixSlideCurrent(
+			this.#bus.state.slide.current + this.#bus.cols - 1,
 		)
 	}
 	#decimal = () => {

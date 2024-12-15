@@ -28,7 +28,7 @@ ${slot}
 		defineShadow.call(
 			this,
 			`
-<div class="marquee py-2.5 flex overflow-hidden gap-3 bg-primary text-white leading-110 text-lg whitespace-nowrap">
+<div class="marquee py-2.5 flex overflow-hidden gap-3 bg-primary text-white leading-110 text-xs md:text-lg whitespace-nowrap">
 	${this.#slot()}
 	${[...Array(+this.getAttribute('copy') ?? 1).keys()]
 		.map(() => this.#slot(true))

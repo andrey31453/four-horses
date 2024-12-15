@@ -1,5 +1,5 @@
-import { config } from '/src/assets/config'
-import { isScreen } from '../utils/helpers/screen'
+import { config } from '/a-style.conf'
+import { isScreen } from '/src/utils/helpers/screen'
 
 const setScreenClass = () => {
 	Object.entries(config.screens).forEach(([key]) =>

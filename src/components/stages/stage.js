@@ -8,7 +8,6 @@ class Stage extends HTMLElement {
 	}
 
 	#render() {
-		this.classList.add('h-full')
 		defineShadow.call(
 			this,
 			`

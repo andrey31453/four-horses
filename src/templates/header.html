@@ -1,68 +1,70 @@
-<section
-	id="header"
-	class="header md:h-screen flex flex-col justify-start items-start py-6 px-18 bg-surface"
->
-	<a-icon
-		a-icon="logo"
-		class="w-50 text-secondary-200"
-	></a-icon>
+<a-surface>
+	<section
+		id="header"
+		class="header md:h-screen flex flex-col justify-start items-start p-4.5 md:py-6 md:px-18"
+	>
+		<a-icon
+			a-icon="logo"
+			class="w-50 text-secondary-200"
+		></a-icon>
 
-	<div class="h-10 md:h-15"></div>
+		<div class="h-10 md:h-15"></div>
 
-	<div class="max-w-136">
-		<div class="text-5xl leading-110 uppercase">
-			<div>Превратите</div>
-			<div>уездный город</div>
-			<div class="text-center">в столицу</div>
-			<div class="text-center">земного шара</div>
-		</div>
+		<div class="max-w-88 md:max-w-136">
+			<div class="text-2xl md:text-3xl md:text-5xl leading-110 uppercase">
+				<div>Превратите</div>
+				<div>уездный город</div>
+				<div class="text-center">в столицу</div>
+				<div class="text-center">земного шара</div>
+			</div>
 
-		<div class="h-6"></div>
-		<div class="text-golos text-sm text-center leading-130">
-			Оплатите взнос на телеграммы для организации Международного васюкинского
-			турнира по шахматам
+			<div class="h-6"></div>
+			<div class="text-golos text-sm md:text-center leading-130">
+				Оплатите взнос на телеграммы для организации Международного васюкинского
+				турнира по шахматам
+			</div>
+			<div class="h-8 md:h-10"></div>
+			<div class="flex max-md:flex-col justify-start items-center gap-4">
+				<button
+					is="a-button"
+					class="w-full md:w-53"
+					a-size="lg"
+					a-name="scroll-to"
+					a-props="#support"
+				>
+					Поддержать шахматную мысль
+				</button>
+				<button
+					is="a-button"
+					class="w-full md:w-53"
+					a-severity="secondary"
+					a-size="lg"
+					a-name="scroll-to"
+					a-props="#about"
+				>
+					Подробнее о турнире
+				</button>
+			</div>
+			<div class="max-md:h-70"></div>
 		</div>
-		<div class="h-8 md:h-10"></div>
-		<div class="flex justify-start items-center gap-4">
-			<button
-				is="a-button"
-				class="md:w-53"
-				a-size="lg"
-				a-name="scroll-to"
-				a-props="#support"
-			>
-				Поддержать шахматную мысль
-			</button>
-			<button
-				is="a-button"
-				class="md:w-53"
-				a-severity="secondary"
-				a-size="lg"
-				a-name="scroll-to"
-				a-props="#about"
-			>
-				Подробнее о турнире
-			</button>
-		</div>
-		<div class="max-md:h-70"></div>
-	</div>
-</section>
+	</section>
+</a-surface>
 
 <style>
-	#header.header {
-		background-image: url('/src/assets/images/banner.png');
-		background-repeat: no-repeat;
-	}
 	body:not(.md) {
 		#header.header {
-			background-position: 90% bottom;
-			background-size: 200%;
+			background-image: url('/src/assets/images/banner-mobile.png');
+			background-position: 100% bottom;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
 		}
 	}
 	body.md {
 		#header.header {
+			background-image: url('/src/assets/images/banner-desktop.png');
 			background-position: center center;
 			background-size: auto 100%;
+			background-repeat: no-repeat;
 		}
 	}
 </style>

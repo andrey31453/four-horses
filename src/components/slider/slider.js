@@ -1,7 +1,7 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/mounted'
-import { config } from '/src/assets/config'
+import { config } from '/a-style.conf'
 import { nextTick } from '/src/utils/helpers/next-tick'
 import { keys } from './config'
 import { sliderBus } from './bus'
