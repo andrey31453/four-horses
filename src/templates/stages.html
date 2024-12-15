@@ -40,7 +40,7 @@
 				<div
 					rows='{ "xs": 2, "lg": 1 }'
 					cols='{ "xs": 1, "lg": 2 }'
-					class="md:pr-20 lg:pr-50"
+					class="lg:pr-50"
 				>
 					Создание аэропорта «Большие Васюки» с регулярным отправлением почтовых
 					самолётов и дирижаблей во все концы света, включая Лос-Анжелос
@@ -80,6 +80,15 @@
 		}
 	}
 	body.md {
+		.airplane:before {
+			top: -40%;
+			left: 60%;
+			right: -50px;
+			bottom: 80%;
+			background-position: center right;
+		}
+	}
+	body.lg {
 		.airplane:before {
 			top: 40%;
 			left: 60%;
