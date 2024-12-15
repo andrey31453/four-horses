@@ -1,3 +1,9 @@
+const pxToRem = (sizes) =>
+	Object.entries(sizes).reduce((remSizes, [key, value]) => {
+		remSizes[key] = value / 16 + 'rem'
+		return remSizes
+	}, {})
+
 export const config = {
 	screens: {
 		xs: 0,
@@ -29,16 +35,17 @@ export const config = {
 			extrabold: 800,
 			black: 900,
 		},
-		sizes: {
+		sizes: pxToRem({
 			xs: 16,
 			sm: 18,
 			base: 20,
 			lg: 22,
 			xl: 24,
-			'2xl': 36,
-			'3xl': 54,
-			'4xl': 60,
-		},
+			'2xl': 28,
+			'3xl': 36,
+			'4xl': 54,
+			'5xl': 60,
+		}),
 		leadings: {
 			min: 50,
 			max: 150,

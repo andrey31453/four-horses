@@ -17,11 +17,10 @@ const initialTextClasses = [
 	`text-end	{text-align: end;}`,
 ]
 
-const textSizeClass = (key, value) =>
-	`text-${key} {font-size: ${value / 16}rem;}`
+const textSizeClass = (key) => `text-${key} {font-size: var(--text-${key});}`
 const textSizeClasses = (sizes) =>
-	Object.entries(sizes).reduce((classes, [key, value]) => {
-		classes.push(textSizeClass(key, value))
+	Object.entries(sizes).reduce((classes, [key]) => {
+		classes.push(textSizeClass(key))
 		return classes
 	}, [])
 

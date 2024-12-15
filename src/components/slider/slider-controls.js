@@ -17,13 +17,9 @@ class SliderControls extends HTMLElement {
 	#mounted = async () => {
 		this.#unMounted = await mounted.call(
 			this,
-			[this.#render, this.#update, this.#emit],
+			[this.#initBus, this.#render, this.#update, this.#emit],
 			() => true,
 		)
-		this.#initBus()
-		this.#render()
-
-		this.#update()
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id))
@@ -47,14 +43,8 @@ class SliderControls extends HTMLElement {
 
 	// emit
 	#emit = () => {
-		windowCallback.emit({
-			name: `${this.getAttribute(keys.id)}-prev`,
-			cb: this.#prev,
-		})
-		windowCallback.emit({
-			name: `${this.getAttribute(keys.id)}-next`,
-			cb: this.#next,
-		})
+		windowCallback.emit(`${this.getAttribute(keys.id)}-prev`, this.#prev)
+		windowCallback.emit(`${this.getAttribute(keys.id)}-next`, this.#next)
 		this.#bus.emit('update', this.#update)
 	}
 
@@ -83,7 +73,10 @@ class SliderControls extends HTMLElement {
 		return slideCurrent
 	}
 	get #slideCurrent() {
-		return this.#fixSlideCurrent(this.#bus.state.slide.current) + 1
+		return (
+			this.#fixSlideCurrent(this.#bus.state.slide.current) +
+			this.#bus.state.slide.quantity
+		)
 	}
 	#decimal = () => {
 		return `

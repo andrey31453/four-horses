@@ -35,9 +35,9 @@ export const config = {
 			base: 20,
 			lg: 22,
 			xl: 24,
-			'2xl': 36,
-			'3xl': 54,
-			'4xl': 60,
+			'3xl': 36,
+			'4xl': 54,
+			'5xl': 60,
 		},
 		leadings: {
 			min: 50,
@@ -75,5 +75,5 @@ export const config = {
 		},
 	},
 
-	content:['']
+	content: [''],
 }

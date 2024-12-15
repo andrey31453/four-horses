@@ -1,8 +1,10 @@
 import { windowCallback } from './callback.js'
 
 const scrollTo = (selector) => {
-	const target = document.querySelector(selector)
-	console.log(target)
+	document.querySelector(selector)?.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start',
+	})
 }
 
 export const useScrollTo = () => {

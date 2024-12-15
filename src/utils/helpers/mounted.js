@@ -3,9 +3,6 @@ import { delay } from './delay'
 
 // TODO добавить счетчик
 
-const isSlotReady = function () {
-	return this.querySelector('*')
-}
 export const mounted = async function (cbs, isReady = null) {
 	const bindCbs = [cbs].flat().map((cb) => debounce(cb.bind(this)))
 
@@ -22,7 +19,7 @@ export const mounted = async function (cbs, isReady = null) {
 			return console.error('Превышено время ожидания компонента: ', this)
 		}
 
-		if (isReady ? !isReady.call(this) : !isSlotReady.call(this)) {
+		if (isReady ? !isReady.call(this) : !this.querySelector('*')) {
 			await delay()
 			return await _mounted.call(this)
 		}

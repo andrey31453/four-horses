@@ -50,7 +50,7 @@ class Button extends HTMLButtonElement {
 			target: this,
 			type: this.getAttribute('a-type'),
 			name: this.getAttribute('a-name'),
-			props: this.getAttribute('a-prop'),
+			props: this.getAttribute('a-props'),
 		})
 	}
 

@@ -16,6 +16,7 @@ export const defineStyle = singleton((config) => [
 	scrollStyle,
 	defineVars(config.colors),
 	defineVars(config.vars),
+	defineVars(config.font.sizes, 'text'),
 	createBorderStyle(),
 ])
 

@@ -6,8 +6,6 @@ import { nextTick } from '/src/utils/helpers/next-tick'
 import { keys } from './config'
 import { sliderBus } from './bus'
 import { isFunction } from '/src/utils/helpers/type.js'
-import { screenValue } from '/src/utils/helpers/screen-value.js'
-import { windowCallback } from '../../composables/callback.js'
 
 class Slider extends HTMLElement {
 	#bus
@@ -19,12 +17,13 @@ class Slider extends HTMLElement {
 
 	#mounted = async () => {
 		// TODO не работает await???
-		this.#unMounted = await mounted.call(this, [this.#render, this.#update])
-
-		this.#initBus()
-		this.#render()
-		this.#emit()
-		this.#onTransition()
+		this.#unMounted = await mounted.call(this, [
+			this.#initBus,
+			this.#render,
+			this.#update,
+			this.#emit,
+			this.#onTransition,
+		])
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id), this)
@@ -51,9 +50,6 @@ class Slider extends HTMLElement {
 	}
 
 	// render
-	get #cols() {
-		return screenValue(this.#bus.props.slides)
-	}
 	get #maxChildHeight() {
 		return this.#children.reduce(
 			(maxChildHeight, child) => Math.max(maxChildHeight, child.clientHeight),
@@ -106,7 +102,8 @@ ${styleLink()}`,
 	// update
 	get #slideWidth() {
 		return (
-			this.#containerWidth / this.#cols - (20 * (this.#cols - 1)) / this.#cols
+			this.#containerWidth / this.#bus.cols -
+			(20 * (this.#bus.cols - 1)) / this.#bus.cols
 		)
 	}
 	get #containerWidth() {

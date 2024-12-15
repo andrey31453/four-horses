@@ -2,8 +2,8 @@ import { throttle } from '/src/utils/helpers/debounce'
 
 let windowOns = []
 export const windowCallback = {
-	emit: (options) => {
-		windowOns.push(options)
+	emit: (name, cb) => {
+		windowOns.push({ name, cb })
 	},
 	on: ({ target, name, props, type }) => {
 		target.addEventListener(

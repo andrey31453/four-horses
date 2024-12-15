@@ -8,10 +8,7 @@ class Participant extends HTMLElement {
 	}
 
 	#emit = () => {
-		windowCallback.emit({
-			name: 'participant-goTo',
-			cb: this.#goTo,
-		})
+		windowCallback.emit('participant-goTo', this.#goTo)
 	}
 
 	#goTo = (url) => {
@@ -33,7 +30,7 @@ class Participant extends HTMLElement {
 		a-severity="info"
 		a-size="sm"
 		a-name="participant-goTo"
-		a-prop="${this.getAttribute('href')}"
+		a-props="${this.getAttribute('href')}"
 	>
 		Подробнее
 	</button>
