@@ -33,6 +33,6 @@ export const mounted = async function (cbs, isReady = null) {
 		})
 		return unMounted
 	}
-	await delay(300)
+	await delay()
 	return await _mounted.call(this)
 }

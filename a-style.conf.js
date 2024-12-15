@@ -8,9 +8,9 @@ export const config = {
 	},
 
 	sizes: {
-		decreasedQuantity: 50,
-		baseQuantity: 50,
-		increasedQuantity: 100,
+		decreasedQuantity: 140,
+		baseQuantity: 140,
+		increasedQuantity: 140,
 	},
 
 	grid: {

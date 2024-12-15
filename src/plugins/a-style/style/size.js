@@ -2,6 +2,7 @@ const initialClasses = [
 	'w-full{width: 100%}',
 	'max-w-full{width: 100%}',
 	'h-full{height: 100%}',
+	'h-screen{height: 100vh;}',
 ]
 
 const sizeClass = ({ name, remSize }) => [

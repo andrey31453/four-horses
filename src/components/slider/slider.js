@@ -7,6 +7,7 @@ import { keys } from './config'
 import { sliderBus } from './bus'
 import { isFunction } from '/src/utils/helpers/type.js'
 import { screenValue } from '/src/utils/helpers/screen-value.js'
+import { windowCallback } from '../../composables/callback.js'
 
 class Slider extends HTMLElement {
 	#bus
@@ -17,22 +18,19 @@ class Slider extends HTMLElement {
 	}
 
 	#mounted = async () => {
-		this.#unMounted = await mounted.call(this, [
-			this.#initBus,
-			this.#render,
-			this.#emit,
-			this.#update,
-			this.#onTransition,
-		])
+		// TODO не работает await???
+		this.#unMounted = await mounted.call(this, [this.#render, this.#update])
+
+		this.#initBus()
+		this.#render()
+		this.#emit()
+		this.#onTransition()
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id), this)
 	}
 	disconnectedCallback() {
-		console.log('Slider: ', this.getAttribute(keys.id))
 		isFunction(this.#unMounted) && this.#unMounted()
-		this.#bus?.off()
-		this.#bus = null
 	}
 
 	// emit

@@ -1,12 +1,10 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { windowCallback } from '/src/composables/callback'
-import { delay } from '/src/utils/helpers/delay.js'
 import { keys } from './config'
 import { sliderBus } from './bus'
-import { store } from './store'
-import { mounted } from '../../utils/helpers/mounted.js'
-import { isFunction } from '../../utils/helpers/type.js'
+import { mounted } from '/src/utils/helpers/mounted.js'
+import { isFunction } from '/src/utils/helpers/type.js'
 
 class SliderControls extends HTMLElement {
 	#bus
@@ -19,19 +17,22 @@ class SliderControls extends HTMLElement {
 	#mounted = async () => {
 		this.#unMounted = await mounted.call(
 			this,
-			[this.#initBus, this.#render, this.#emit, this.#update],
+			[this.#render, this.#update, this.#emit],
 			() => true,
 		)
+		this.#initBus()
+		this.#render()
+
+		this.#update()
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id))
 	}
 	// TODO не размонтируются внутри shadowDom
 	disconnectedCallback() {
-		console.log('SliderControls: ', this.getAttribute(keys.id))
 		isFunction(this.#unMounted) && this.#unMounted()
-		this.#bus?.off()
-		this.#bus = null
+		windowCallback.off(`${this.getAttribute(keys.id)}-prev`)
+		windowCallback.off(`${this.getAttribute(keys.id)}-next`)
 	}
 
 	// node

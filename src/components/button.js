@@ -22,7 +22,7 @@ const propsConfig = {
 	},
 	'a-size': {
 		sm: 'h-9 rounded-4.5 border-1 leading-120',
-		lg: 'h-18 rounded-9 border-2 leading-130',
+		lg: 'h-18 rounded-9 border-2 leading-130 p-5',
 	},
 	'a-icon': {
 		false: '',

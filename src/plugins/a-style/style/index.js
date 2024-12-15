@@ -19,6 +19,7 @@ export const defineStyle = singleton((config) => [
 	createBorderStyle(),
 ])
 
+// TODO Переписать на класс
 export const defineClasses = singleton((config) =>
 	[
 		templateClasses,

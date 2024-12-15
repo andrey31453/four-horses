@@ -11,15 +11,12 @@ import stages from '/src/templates/stages.html?raw'
 import footer from '/src/templates/footer.html?raw'
 import runningLine from '/src/templates/running-line.html?raw'
 import participants from '/src/templates/participants.html?raw'
+import { useScrollTo } from './composables/scroll-to.js'
 
 bootstrap()
 	.use(useScreenClass)
-	.template(
-		defineTemplate('link', {
-			href: 'src/assets/styles/a-style.css',
-			rel: 'stylesheet',
-		}),
-	)
+	.use(useScrollTo)
+	.template(defineTemplate('div', null, styleLink()))
 	.template(
 		defineTemplate(
 			'div',
