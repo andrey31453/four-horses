@@ -1,5 +1,5 @@
 import { defineShadow } from '/src/utils/helpers/shadow.js'
-import { styleLink } from '/src/utils/helpers/style-link.js'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link.js'
 
 class Surface extends HTMLElement {
 	constructor() {
@@ -19,7 +19,7 @@ class Surface extends HTMLElement {
 	</div>
 </div>
 
-${styleLink()}
+${aTailwindLink()}
 <style>
 .surface {
   position: relative;

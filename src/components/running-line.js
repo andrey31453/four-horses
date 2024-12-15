@@ -1,4 +1,4 @@
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { debounce } from '/src/utils/helpers/debounce'
 
@@ -35,7 +35,7 @@ ${slot}
 		.join('')}
 </div>
 
-${styleLink()}
+${aTailwindLink()}
 
 <style>
 .marquee-item {

@@ -1,5 +1,5 @@
 // TODO инкапсулировать
-import { config } from '../../../../a-style.conf.js'
+import { config } from '../../../../a-tailwind.conf.js'
 
 const withImportant = (classesWithImportant, c) => {
 	classesWithImportant.push(c)

@@ -1,4 +1,4 @@
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { windowCallback } from '/src/composables/callback'
 import { keys } from './config'
@@ -130,7 +130,7 @@ class SliderControls extends HTMLElement {
 	${this.#slot}
 </div>
 
-${styleLink()}`,
+${aTailwindLink()}`,
 		)
 	}
 

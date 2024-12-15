@@ -11,8 +11,8 @@ const propsConfig = {
 		],
 		secondary: [
 			'text-black hover:text-white disabled:text-secondary-800',
-			'bg-transparent hover:bg-black disabled:bg-transparent',
-			'border-black hover:border-black disabled:border-secondary-800',
+			'bg-white/50 md:bg-transparent hover:bg-black disabled:bg-transparent',
+			'md:border-black hover:border-black disabled:border-secondary-800',
 		],
 		info: [
 			'text-blue hover:text-white disabled:text-secondary-800',

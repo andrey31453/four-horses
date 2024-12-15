@@ -1,4 +1,5 @@
 import { layers, withLayer } from './layers.js'
+import { withOpacity } from './color.js'
 
 const roundedClass = (size) => [
 	`rounded-${size} {border-radius: ${size / 4}rem;}`,
@@ -12,7 +13,7 @@ const borderWidthClass = (size) => [
 	`border-l-${size} {border-left-width: ${size}px;}`,
 ]
 const borderColorClass = (name) =>
-	`border-${name} {border-color: var(--${name});}`
+	`border-${name} {border-color: rgb(var(--${name}));}`
 
 export const createBorderStyle = () =>
 	withLayer(layers.base, '*,::before,::after{border: 0 solid transparent;}')
@@ -25,7 +26,7 @@ export const createBorderClasses = (sizes, colors) => [
 		return classes
 	}, []),
 	Object.entries(colors).reduce((classes, [name]) => {
-		classes.push(borderColorClass(name))
+		classes.push(withOpacity(borderColorClass(name)))
 		return classes
 	}, []),
 ]

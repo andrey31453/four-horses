@@ -1,4 +1,4 @@
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { defineShadow } from '/src/utils/helpers/shadow.js'
 
 class Stage extends HTMLElement {
@@ -21,7 +21,7 @@ class Stage extends HTMLElement {
 	<div class="leading-120 font-medium">${this.innerHTML}</div>
 </div>
 
-${styleLink()}`,
+${aTailwindLink()}`,
 		)
 	}
 }

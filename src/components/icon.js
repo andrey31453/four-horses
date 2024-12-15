@@ -1,7 +1,7 @@
 import logo from '/src/assets/icons/logo.svg?raw'
 import chevronRight from '/src/assets/icons/chevron-right.svg?raw'
 import { defineShadow } from '/src/utils/helpers/shadow'
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 
 const icons = {
 	'chevron-right': chevronRight,
@@ -20,7 +20,7 @@ class Icon extends HTMLElement {
 			`
 ${icon}
 
-${styleLink()}
+${aTailwindLink()}
 <style>
 svg {
 	display: block;

@@ -1,7 +1,7 @@
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/mounted'
-import { config } from '/a-style.conf'
+import { config } from '/Users/webserfer/repositories/bastion/four-horses/a-tailwind.conf'
 import { nextTick } from '/src/utils/helpers/next-tick'
 import { keys } from './config'
 import { sliderBus } from './bus'
@@ -95,7 +95,7 @@ ${this.#child(child, childIdx + shiftNumber)}`,
 	</div>
 </div>
 
-${styleLink()}`,
+${aTailwindLink()}`,
 		)
 	}
 

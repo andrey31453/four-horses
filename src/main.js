@@ -1,7 +1,7 @@
 import { bootstrap } from '/src/composables/bootstrap'
 import { emptySection } from '/src/utils/helpers/empty-section'
 import { defineTemplate } from '/src/utils/helpers/template'
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { useScreenClass } from '/src/composables/screenClass'
 
 import header from '/src/templates/header.html?raw'
@@ -16,7 +16,7 @@ import { useScrollTo } from './composables/scroll-to.js'
 bootstrap()
 	.use(useScreenClass)
 	.use(useScrollTo)
-	.template(defineTemplate('div', null, styleLink()))
+	.template(defineTemplate('div', null, aTailwindLink()))
 	.template(
 		defineTemplate(
 			'div',

@@ -5,7 +5,7 @@ import { content } from './fs/content.js'
 import { withGeneratingLayer } from './style/layers.js'
 import { minimizeCSS } from './utils/minimize.js'
 
-export class AStyle {
+export class ATailwind {
 	constructor(config) {
 		this.config = config
 	}

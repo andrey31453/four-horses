@@ -1,4 +1,4 @@
-import { config } from '/a-style.conf'
+import { config } from '/Users/webserfer/repositories/bastion/four-horses/a-tailwind.conf'
 import { isScreen } from '/src/utils/helpers/screen'
 
 const setScreenClass = () => {

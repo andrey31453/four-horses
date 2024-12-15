@@ -1,4 +1,4 @@
-import { styleLink } from '/src/utils/helpers/style-link'
+import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { isScreen } from '/src/utils/helpers/screen'
 import { defineShadow } from '../utils/helpers/shadow'
 import { debounce } from '../utils/helpers/debounce'
@@ -53,7 +53,7 @@ class Table extends HTMLElement {
 	${this.#data}
 </div>
 
-${styleLink()}`,
+${aTailwindLink()}`,
 		)
 	}
 }
