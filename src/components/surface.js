@@ -10,10 +10,11 @@ class Surface extends HTMLElement {
 	#render() {
 		this.classList.add('flex')
 		this.classList.add('overflow-hidden')
+		this.classList.add('w-full')
 		defineShadow.call(
 			this,
 			`
-<div class="surface flex w-full">
+<div class="surface flex w-full h-full">
 	<div class="w-full">
 		<slot></slot>
 	</div>
@@ -34,7 +35,7 @@ ${aTailwindLink()}
 		content: "";
 		
 		inset: 0;
-		background-color: var(--surface);
+		background-color: rgb(var(--surface));
 		opacity: 0.8;
 		z-index: 1;
 	}

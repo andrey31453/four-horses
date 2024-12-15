@@ -10,6 +10,7 @@ class StageGroup extends HTMLElement {
 	#render() {
 		this.classList.add('flex')
 		this.classList.add('h-full')
+		this.classList.add('w-full')
 		defineShadow.call(
 			this,
 			`

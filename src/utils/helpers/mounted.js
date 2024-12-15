@@ -1,13 +1,17 @@
 import { debounce } from './debounce'
 import { delay } from './delay'
 
-// TODO добавить счетчик
-
-export const mounted = async function (cbs, isReady = null) {
-	const bindCbs = [cbs].flat().map((cb) => debounce(cb.bind(this)))
+export const mounted = async function (
+	cbs = [],
+	listenerCbs = [],
+	isReady = null,
+) {
+	const bindlistenerCbs = [listenerCbs]
+		.flat()
+		.map((cb) => debounce(cb.bind(this)))
 
 	const unMounted = () => {
-		bindCbs.forEach((cb) => {
+		bindlistenerCbs.forEach((cb) => {
 			window.removeEventListener('resize', cb)
 		})
 	}
@@ -24,10 +28,14 @@ export const mounted = async function (cbs, isReady = null) {
 			return await _mounted.call(this)
 		}
 
-		bindCbs.forEach((cb) => {
+		;[cbs].flat().forEach((cb) => {
+			cb.call(this)
+		})
+		bindlistenerCbs.forEach((cb) => {
 			cb.call(this)
 			window.addEventListener('resize', cb)
 		})
+
 		return unMounted
 	}
 	await delay()

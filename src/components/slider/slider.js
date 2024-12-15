@@ -17,13 +17,11 @@ class Slider extends HTMLElement {
 
 	#mounted = async () => {
 		// TODO не работает await???
-		this.#unMounted = await mounted.call(this, [
-			this.#initBus,
-			this.#render,
-			this.#update,
-			this.#emit,
-			this.#onTransition,
-		])
+		this.#initBus()
+		this.#unMounted = await mounted.call(this, this.#render, this.#update)
+
+		this.#emit()
+		this.#onTransition()
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id), this)
@@ -45,28 +43,17 @@ class Slider extends HTMLElement {
 	get #node() {
 		return {
 			slider: this.shadowRoot.getElementById('slider'),
-			zeroChild: this.shadowRoot.getElementById('child-0'),
+			children: this.shadowRoot.querySelectorAll('.child'),
 		}
 	}
 
 	// render
-	get #maxChildHeight() {
-		return this.#children.reduce(
-			(maxChildHeight, child) => Math.max(maxChildHeight, child.clientHeight),
-			0,
-		)
-	}
 	#child = (child, childIdx) => {
-		const width = `${this.#slideWidth}px`
 		return `
 <div
-	id='child-${childIdx}'
-	class="flex flex-col items-center h-full" 
-	style="
-		min-width: ${width};
-		max-width: ${width};
-		min-height: ${this.#maxChildHeight}px;
-	">
+	class="child flex flex-col items-center h-full" 
+	style="${this.#childStyle}"
+>
 	${child.innerHTML}
 </div>`
 	}
@@ -100,6 +87,18 @@ ${aTailwindLink()}`,
 	}
 
 	// update
+	get #maxChildHeight() {
+		return this.#children.reduce(
+			(maxChildHeight, child) => Math.max(maxChildHeight, child.clientHeight),
+			0,
+		)
+	}
+	get #childStyle() {
+		return `
+min-width: ${this.#slideWidth}px;
+max-width: ${this.#slideWidth}px;
+min-height: ${this.#maxChildHeight}px;`
+	}
 	get #slideWidth() {
 		return (
 			this.#containerWidth / this.#bus.cols -
@@ -124,6 +123,9 @@ grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
+		this.#node.children.forEach((child) =>
+			child.setAttribute('style', this.#childStyle),
+		)
 	}
 	#onTransition = () => {
 		this.#node.slider.classList.add('transition')

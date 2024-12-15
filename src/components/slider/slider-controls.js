@@ -15,16 +15,18 @@ class SliderControls extends HTMLElement {
 	}
 
 	#mounted = async () => {
+		this.#initBus()
 		this.#unMounted = await mounted.call(
 			this,
-			[this.#initBus, this.#render, this.#update, this.#emit],
+			this.#render,
+			this.#update,
 			() => true,
 		)
+		this.#emit()
 	}
 	#initBus = () => {
 		this.#bus = sliderBus(this.getAttribute(keys.id))
 	}
-	// TODO не размонтируются внутри shadowDom
 	disconnectedCallback() {
 		isFunction(this.#unMounted) && this.#unMounted()
 		windowCallback.off(`${this.getAttribute(keys.id)}-prev`)

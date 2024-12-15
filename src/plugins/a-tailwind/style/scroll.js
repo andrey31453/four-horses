@@ -9,10 +9,10 @@ const _scrollStyle = `
   display: none;
 }
 ::-webkit-scrollbar-track {
-  background-color: var(--white);
+  background-color: rgb(var(--white));
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, var(--primary), var(--red));
+  background: linear-gradient(to bottom, rgb(var(--primary)), rgb(var(--red)));
 }
 `
 export const scrollStyle = withLayer(layers.base, _scrollStyle)

@@ -9,7 +9,7 @@ class Stages extends HTMLElement {
 		this.#mounted()
 	}
 	#mounted = async () => {
-		await mounted.call(this, [this.#render])
+		await mounted.call(this, this.#render)
 	}
 
 	// state
@@ -17,7 +17,7 @@ class Stages extends HTMLElement {
 		return [...this.children]
 	}
 	get #gridCols() {
-		return this.getAttribute('a-cols') || 12
+		return screenValue(JSON.parse(this.getAttribute('a-cols') ?? {})) || 12
 	}
 	get #stageGroupsQuantity() {
 		return (
@@ -26,10 +26,16 @@ class Stages extends HTMLElement {
 	}
 
 	cols = (i) => {
-		return +this.#children[i]?.getAttribute('cols') || 1
+		return screenValue(
+			JSON.parse(this.#children[i]?.getAttribute('cols') ?? '{ "xs": 1 }'),
+		)
 	}
 	rows = (i) => {
-		return +this.#children[i]?.getAttribute('rows') || 1
+		return (
+			screenValue(
+				JSON.parse(this.#children[i]?.getAttribute('rows') ?? '{ "xs": 1 }'),
+			) || 1
+		)
 	}
 	stageQuantities = (i) => {
 		const cols = this.cols(i) === 1 ? 0 : this.cols(i)
@@ -74,11 +80,10 @@ class Stages extends HTMLElement {
 </div>
 
 <div class="md:hidden">
-<div class="h-23"></div>
+	<div class="h-23"></div>
 	<div class="grid gap-7">
 		<a-slider
 		 a-id="stages"
-		 class=""
 		 slides='{"xs": 1}'
 		>
 		 ${this.#slot}
@@ -89,33 +94,7 @@ class Stages extends HTMLElement {
 	</div>
 </div>
 
-${aTailwindLink()}
-<style>
-.stage-item {
-	position: relative;
-	
-	background-image: url("src/assets/images/bg.png");
-	background-position: center;
-	background-repeat: repeat;
-	background-size: auto auto;
-	
-	&::before {
-		position: absolute;
-		content: "";
-		
-		inset: 0;
-		background-color: var(--surface);
-		opacity: 0.85;
-		z-index: 1;
-	}
-	
-	& > * {
-		position: relative;
-		z-index: 2;
-	}
-}
-</style>	
-		`,
+${aTailwindLink()}`,
 		)
 	}
 }

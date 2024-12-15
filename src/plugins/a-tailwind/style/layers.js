@@ -3,8 +3,8 @@ import { config } from '../../../../a-tailwind.conf.js'
 export const layers = {
 	base: 'base',
 	utils: 'utils',
-	pseudo: 'pseudo',
 	screens: 'screens',
+	pseudo: 'pseudo',
 }
 
 export const defineLayers = (layers) =>
