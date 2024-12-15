@@ -1,5 +1,5 @@
 <section>
-	<a-container class="grid gap-y-40 md:gap-y-16">
+	<a-container class="grid gap-5 md:gap-13">
 		<!-- title -->
 		<div class="grid grid-cols-12">
 			<div
@@ -17,42 +17,74 @@
 		</div>
 		<!-- !title -->
 
-		<a-teleport a-id="stages">
-			<div>Строительство железнодорожной магистрали Москва-Васюки</div>
-			<div>
-				Открытие фешенебельной гостиницы «Проходная пешка» и других небоскрёбов
-			</div>
-			<div row="2">
-				Поднятие сельского хозяйства в радиусе на тысячу километров:
-				производство овощей, фруктов, икры, шоколадных конфет
-			</div>
-			<div>Строительство дворца для турнира</div>
-			<div>Размещение гаражей для гостевого автотранспорта</div>
-			<div>
-				Постройка сверхмощной радиостанции для передачи всему миру сенсационных
-				результатов
-			</div>
-			<div col="2">
-				Создание аэропорта «Большие Васюки» с регулярным отправлением почтовых
-				самолётов и дирижаблей во все концы света, включая Лос-Анжелос
-				и Мельбурн
-			</div>
-		</a-teleport>
-
-		<a-stages
-			cols="3"
-			a-teleport-id="stages"
-			class="hidden md:!block"
-		></a-stages>
-
-		<a-slider
-			a-id="stages"
-			a-teleport-id="stages"
-			class="md:hidden"
-		></a-slider>
-		<a-slider-controls
-			a-id="stages"
-			class="md:hidden"
-		></a-slider-controls>
+		<div class="airplane">
+			<a-stages
+				a-cols="3"
+				a-stages-group='{ "xs":2, "md": 1}'
+			>
+				<div>Строительство железнодорожной магистрали Москва-Васюки</div>
+				<div>
+					Открытие фешенебельной гостиницы «Проходная пешка» и других
+					небоскрёбов
+				</div>
+				<div rows="2">
+					Поднятие сельского хозяйства в радиусе на тысячу километров:
+					производство овощей, фруктов, икры, шоколадных конфет
+				</div>
+				<div>Строительство дворца для турнира</div>
+				<div>Размещение гаражей для гостевого автотранспорта</div>
+				<div>
+					Постройка сверхмощной радиостанции для передачи всему миру
+					сенсационных результатов
+				</div>
+				<div
+					cols="2"
+					class="md:pr-50"
+				>
+					Создание аэропорта «Большие Васюки» с регулярным отправлением почтовых
+					самолётов и дирижаблей во все концы света, включая Лос-Анжелос
+					и Мельбурн
+				</div>
+			</a-stages>
+		</div>
 	</a-container>
 </section>
+
+<style>
+	.airplane {
+		position: relative;
+		z-index: 0;
+
+		&:before {
+			position: absolute;
+			content: '';
+
+			z-index: 10;
+			inset: 0;
+
+			background-image: url('src/assets/images/airplane.png');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center right;
+		}
+	}
+
+	body:not(.md) {
+		.airplane:before {
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 40%;
+			background-position: top right;
+		}
+	}
+	body.md {
+		.airplane:before {
+			top: 40%;
+			left: 60%;
+			right: -50px;
+			bottom: 0%;
+			background-position: center right;
+		}
+	}
+</style>

@@ -1,43 +1,37 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { windowCallback } from '/src/composables/callback'
+import { delay } from '/src/utils/helpers/delay.js'
 import { keys } from './config'
-import { SliderBus } from './bus'
+import { sliderBus } from './bus'
 import { store } from './store'
-import { delay } from '../../utils/helpers/delay.js'
+import { mounted } from '../../utils/helpers/mounted.js'
+import { isFunction } from '../../utils/helpers/type.js'
 
 class SliderControls extends HTMLElement {
 	#bus
 	#unMounted
 	constructor() {
 		super()
-		this.#sliderMounted()
-	}
-
-	// safe mount after mount slider
-	#mountedConf = {
-		quantity: 0,
-		max: 100,
-	}
-	async #sliderMounted() {
-		if (this.#mountedConf.quantity >= this.#mountedConf.max) {
-			return console.error(`Don't correct a-id: ${this.getAttribute(keys.id)}`)
-		}
-		if (!store.props(this.getAttribute(keys.id))) {
-			this.#mountedConf.quantity++
-			await delay()
-			return this.#sliderMounted(this)
-		}
 		this.#mounted()
 	}
+
 	#mounted = async () => {
-		this.#bus = new SliderBus(this.getAttribute(keys.id))
-		this.#render()
-		this.#emit()
-		this.#update()
+		this.#unMounted = await mounted.call(
+			this,
+			[this.#initBus, this.#render, this.#emit, this.#update],
+			() => true,
+		)
 	}
+	#initBus = () => {
+		this.#bus = sliderBus(this.getAttribute(keys.id))
+	}
+	// TODO не размонтируются внутри shadowDom
 	disconnectedCallback() {
-		this.#unMounted()
+		console.log('SliderControls: ', this.getAttribute(keys.id))
+		isFunction(this.#unMounted) && this.#unMounted()
+		this.#bus?.off()
+		this.#bus = null
 	}
 
 	// node
@@ -64,7 +58,7 @@ class SliderControls extends HTMLElement {
 	}
 
 	// render
-	#dot = (i) => {
+	#dot = () => {
 		return `
 <div class="js__dot size-2.5 rounded-full bg-secondary-800"></div>`
 	}
@@ -139,7 +133,7 @@ class SliderControls extends HTMLElement {
 		defineShadow.call(
 			this,
 			`
-<div class="h-full flex justify-center md:justify-end items-center gap-4">
+<div class="min-h-9 flex justify-center md:justify-end items-center gap-4">
 	${this.#slot}
 </div>
 

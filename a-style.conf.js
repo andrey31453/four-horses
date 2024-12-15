@@ -8,8 +8,8 @@ export const config = {
 	},
 
 	sizes: {
-		decreasedQuantity: 10,
-		baseQuantity: 20,
+		decreasedQuantity: 50,
+		baseQuantity: 50,
 		increasedQuantity: 100,
 	},
 

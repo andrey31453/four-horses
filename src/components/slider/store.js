@@ -23,6 +23,9 @@ class Store {
 				_store.state[id].slide.current === _store.state[id].slide.max,
 		}
 	}
+	off = (id) => {
+		_store.cbs[id] = []
+	}
 
 	#init = (id) => {
 		_store.props[id] = null

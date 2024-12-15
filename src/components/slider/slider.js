@@ -1,28 +1,21 @@
 import { styleLink } from '/src/utils/helpers/style-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
-import { isScreen } from '/src/utils/helpers/screen'
-import { mounted } from '/src/utils/helpers/component'
+import { mounted } from '/src/utils/helpers/mounted'
 import { config } from '/src/assets/config'
 import { nextTick } from '/src/utils/helpers/next-tick'
 import { keys } from './config'
-import { SliderBus } from './bus'
-import { store } from './store'
+import { sliderBus } from './bus'
+import { isFunction } from '/src/utils/helpers/type.js'
+import { screenValue } from '/src/utils/helpers/screen-value.js'
 
 class Slider extends HTMLElement {
 	#bus
 	#unMounted
 	constructor() {
 		super()
-		if (store.props(this.getAttribute(keys.id))) {
-			return console.error(
-				`Duplicate ${keys.id}: ${this.getAttribute(keys.id)}`,
-			)
-		}
 		this.#mounted()
 	}
-	#initBus = () => {
-		this.#bus = new SliderBus(this.getAttribute(keys.id), this)
-	}
+
 	#mounted = async () => {
 		this.#unMounted = await mounted.call(this, [
 			this.#initBus,
@@ -32,8 +25,14 @@ class Slider extends HTMLElement {
 			this.#onTransition,
 		])
 	}
+	#initBus = () => {
+		this.#bus = sliderBus(this.getAttribute(keys.id), this)
+	}
 	disconnectedCallback() {
-		this.#unMounted()
+		console.log('Slider: ', this.getAttribute(keys.id))
+		isFunction(this.#unMounted) && this.#unMounted()
+		this.#bus?.off()
+		this.#bus = null
 	}
 
 	// emit
@@ -55,17 +54,25 @@ class Slider extends HTMLElement {
 
 	// render
 	get #cols() {
-		return Object.entries(this.#bus.props.slides).reduce(
-			(cols, [breadcrumb, colQuantity]) =>
-				isScreen(breadcrumb) ? colQuantity : cols,
-			1,
+		return screenValue(this.#bus.props.slides)
+	}
+	get #maxChildHeight() {
+		return this.#children.reduce(
+			(maxChildHeight, child) => Math.max(maxChildHeight, child.clientHeight),
+			0,
 		)
 	}
-
 	#child = (child, childIdx) => {
 		const width = `${this.#slideWidth}px`
 		return `
-<div id='child-${childIdx}' class="flex flex-col items-center" style="min-width: ${width}; max-width: ${width}">
+<div
+	id='child-${childIdx}'
+	class="flex flex-col items-center h-full" 
+	style="
+		min-width: ${width};
+		max-width: ${width};
+		min-height: ${this.#maxChildHeight}px;
+	">
 	${child.innerHTML}
 </div>`
 	}
@@ -89,7 +96,7 @@ ${this.#child(child, childIdx + shiftNumber)}`,
 			this,
 			`
 <div class="overflow-hidden">
-	<div id="slider" class="flex flex-start gap-5">
+	<div id="slider" class="grid flex-start gap-5">
 			${this.#slot}
 	</div>
 </div>
@@ -105,18 +112,20 @@ ${styleLink()}`,
 		)
 	}
 	get #containerWidth() {
-		const containerPadding = getComputedStyle(this.closest('a-container'))[
+		const container = document.body.querySelector('a-container')
+		const containerPadding = getComputedStyle(container)[
 			'padding-left'
 		].replace('px', '')
-		return this.closest('*:not(a-slider)').offsetWidth - 2 * containerPadding
+		return container.offsetWidth - 2 * containerPadding
 	}
 	get #sliderShift() {
-		return -(this.#bus.state.slide.current + 1) * (this.#slideWidth + 20)
+		return -this.#bus.state.slide.current * (this.#slideWidth + 20)
 	}
 	get #sliderStyle() {
 		return `
 max-width: ${this.#containerWidth}px;
-transform: translate(${this.#sliderShift}px, 0);`
+transform: translate(${this.#sliderShift}px, 0);
+grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)

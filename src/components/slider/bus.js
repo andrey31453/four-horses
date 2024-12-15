@@ -1,7 +1,7 @@
 import { nextTick } from '/src/utils/helpers/next-tick'
 import { store } from './store'
 
-export class SliderBus {
+class SliderBus {
 	#id
 	constructor(id, ctx) {
 		this.#id = id
@@ -41,13 +41,19 @@ export class SliderBus {
 
 	// cbs
 	emit = (name, cb) => {
-		this.cbs.push({
+		store.cbs(this.#id).push({
 			name,
 			cb,
 		})
 	}
 	on = (cbName) => {
-		this.cbs.filter(({ name }) => name === cbName).forEach(({ cb }) => cb())
+		store
+			.cbs(this.#id)
+			.filter(({ name }) => name === cbName)
+			.forEach(({ cb }) => cb())
+	}
+	off = () => {
+		store.off(this.#id)
 	}
 
 	// changes state
@@ -92,4 +98,12 @@ export class SliderBus {
 		}
 		this.#autoChange()
 	}
+}
+
+const buses = {}
+export const sliderBus = (id, ctx) => {
+	if (!buses[id]) {
+		buses[id] = new SliderBus(id, ctx)
+	}
+	return buses[id]
 }

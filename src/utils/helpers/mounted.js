@@ -3,10 +3,10 @@ import { delay } from './delay'
 
 // TODO добавить счетчик
 
-const cbTypes = {
-	slot: () => {},
+const isSlotReady = function () {
+	return this.querySelector('*')
 }
-export const mounted = async function (cbs, type = 'slot') {
+export const mounted = async function (cbs, isReady = null) {
 	const bindCbs = [cbs].flat().map((cb) => debounce(cb.bind(this)))
 
 	const unMounted = () => {
@@ -15,16 +15,16 @@ export const mounted = async function (cbs, type = 'slot') {
 		})
 	}
 
-	const mountedConf = { quantity: 0, max: 100 }
-	const _mounted = async () => {
+	const mountedConf = { quantity: 0, max: 10 }
+	const _mounted = async function () {
 		mountedConf.quantity++
 		if (mountedConf.quantity > mountedConf.max) {
 			return console.error('Превышено время ожидания компонента: ', this)
 		}
 
-		if (!this.querySelector('*')) {
+		if (isReady ? !isReady.call(this) : !isSlotReady.call(this)) {
 			await delay()
-			return await _mounted()
+			return await _mounted.call(this)
 		}
 
 		bindCbs.forEach((cb) => {
@@ -33,5 +33,6 @@ export const mounted = async function (cbs, type = 'slot') {
 		})
 		return unMounted
 	}
-	return await _mounted()
+	await delay(300)
+	return await _mounted.call(this)
 }

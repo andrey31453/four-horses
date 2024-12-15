@@ -35,9 +35,11 @@ const propsConfig = {
 }
 class Button extends HTMLButtonElement {
 	static observedAttributes = Object.keys(propsConfig)
+	#id
 	#domClasses
 	constructor() {
 		super()
+		this.#id = Math.random()
 		this.#domClasses = this.className
 		this.#emit()
 		this.#update()
@@ -86,10 +88,6 @@ class Button extends HTMLButtonElement {
 
 	disconnectedCallback() {
 		windowCallback.off(this.getAttribute('a-name'))
-	}
-
-	assignedSlot() {
-		console.log('assignedSlot')
 	}
 }
 customElements.define('a-button', Button, {
