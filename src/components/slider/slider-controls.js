@@ -38,7 +38,8 @@ class SliderControls extends HTMLElement {
 		return {
 			prev: this.shadowRoot.getElementById('prev'),
 			next: this.shadowRoot.getElementById('next'),
-			decimal: this.shadowRoot.getElementById('decimal'),
+			'decimal-current': this.shadowRoot.getElementById('decimal-current'),
+			'decimal-quantity': this.shadowRoot.getElementById('decimal-quantity'),
 			dots: this.shadowRoot.querySelectorAll('.js__dot'),
 		}
 	}
@@ -81,9 +82,10 @@ class SliderControls extends HTMLElement {
 	}
 	#decimal = () => {
 		return `
-<div class="flex justify-center items-center text-golos">
-	<span id="decimal" class="transition">${this.#slideCurrent}</span>
-	<span class="text-secondary-800">/ ${this.#bus.state.slide.quantity}</span>
+<div class="flex justify-center items-center gap-1 text-golos">
+	<span id="decimal-current" class="transition">${this.#slideCurrent}</span>
+	<span class="text-secondary-500">/</span>
+	<span id='decimal-quantity' class="text-secondary-500">${this.#bus.state.slide.quantity}</span>
 </div>`
 	}
 	get #slideInfo() {
@@ -150,7 +152,8 @@ ${aTailwindLink()}`,
 			return
 		}
 
-		this.#node.decimal.innerHTML = `${this.#slideCurrent}`
+		this.#node['decimal-current'].innerHTML = this.#slideCurrent
+		this.#node['decimal-quantity'].innerHTML = this.#bus.state.slide.quantity
 	}
 	#updateDotted = () => {
 		this.#node.dots.forEach((item, idx) => {
@@ -160,10 +163,11 @@ ${aTailwindLink()}`,
 		})
 	}
 	#update = () => {
-		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
-		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
 		this.#updateDecimal()
 		this.#updateDotted()
+
+		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
+		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
 	}
 }
 customElements.define('a-slider-controls', SliderControls)

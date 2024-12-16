@@ -1,14 +1,15 @@
 import { debounce } from './debounce'
 import { delay } from './delay'
 
+// TODO заменить call.this => ()
 export const mounted = async function (
 	cbs = [],
 	listenerCbs = [],
 	isReady = null,
 ) {
-	const bindlistenerCbs = [listenerCbs]
-		.flat()
-		.map((cb) => debounce(cb.bind(this)))
+	const bindlistenerCbs = listenerCbs
+		? [listenerCbs].flat().map((cb) => debounce(cb.bind(this)))
+		: []
 
 	const unMounted = () => {
 		bindlistenerCbs.forEach((cb) => {
@@ -28,9 +29,10 @@ export const mounted = async function (
 			return await _mounted.call(this)
 		}
 
-		;[cbs].flat().forEach((cb) => {
-			cb.call(this)
-		})
+		cbs &&
+			[cbs].flat().forEach((cb) => {
+				cb.call(this)
+			})
 		bindlistenerCbs.forEach((cb) => {
 			cb.call(this)
 			window.addEventListener('resize', cb)

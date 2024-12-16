@@ -1,13 +1,16 @@
 import { nextTick } from '/src/utils/helpers/next-tick'
 import { store } from './store'
 import { screenValue } from '/src/utils/helpers/screen-value.js'
+import { mounted } from '/src/utils/helpers/mounted.js'
 
 class SliderBus {
 	#id
+	#ctx
 	constructor(id, ctx) {
 		this.#id = id
 		if (!ctx) return
 
+		this.#ctx = ctx
 		store.define(id, ctx)
 		store.update(id)
 		this.#initAutoChange(id)
@@ -26,6 +29,11 @@ class SliderBus {
 		return screenValue(this.props.slides)
 	}
 
+	updateState = () => {
+		store.defineState(this.#id, this.#ctx)
+		store.update(this.#id, this.#ctx)
+		this.#fixState()
+	}
 	#fixState = () => {
 		if (this.state.slide.current < 0) {
 			nextTick(() => {

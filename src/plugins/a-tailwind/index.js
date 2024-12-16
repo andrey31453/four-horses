@@ -10,6 +10,7 @@ export class ATailwind {
 	constructor(config) {
 		this.config = config
 	}
+	k
 
 	#classesMap = () =>
 		withModifiers(defineClasses(this.config)).reduce(
@@ -60,25 +61,3 @@ export class ATailwind {
 		)
 	}
 }
-
-export const pxToRem = (sizes) =>
-	Object.entries(sizes).reduce((remSizes, [key, value]) => {
-		remSizes[key] = value / 16 + 'rem'
-		return remSizes
-	}, {})
-
-const _hexToRgb = (hex) => {
-	if (!hex.startsWith('#')) {
-		return hex
-	}
-
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-	return result
-		? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-		: console.error(`don't correct hex color: ${hex}`)
-}
-export const hexToRgb = (hexColors) =>
-	Object.entries(hexColors).reduce((rgbColors, [key, value]) => {
-		rgbColors[key] = _hexToRgb(value)
-		return rgbColors
-	}, {})

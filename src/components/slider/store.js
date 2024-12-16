@@ -11,7 +11,7 @@ class Store {
 	define(id, ctx) {
 		this.#init(id)
 		this.#defineProps(id, ctx)
-		this.#defineState(id, ctx)
+		this.defineState(id, ctx)
 	}
 	update(id) {
 		_store.state[id].disabled = {
@@ -45,7 +45,7 @@ class Store {
 			},
 		}
 	}
-	#defineState = (id, ctx) => {
+	defineState = (id, ctx) => {
 		if (_store.props[id].infinity) {
 			_store.state[id] = {
 				slide: {
@@ -68,6 +68,9 @@ class Store {
 			},
 			ctx,
 		}
+
+		console.log(ctx)
+		console.log(ctx.children.length)
 	}
 }
 export const store = new Store()
