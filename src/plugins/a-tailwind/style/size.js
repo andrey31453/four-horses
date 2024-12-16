@@ -1,3 +1,4 @@
+// TODO style plugin add function max min to w & h
 const initialClasses = [
 	'w-full{width: 100%}',
 	'max-w-full{width: 100%}',

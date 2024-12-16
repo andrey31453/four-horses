@@ -1,5 +1,0 @@
-TODO this.#render => useRender?
-TODO add /**/ comment to props?
-TODO style plugin add max min to w & h
-TODO style plugin change hover & disabled (hadle for => for from keys)
-TODO refactor style plugin

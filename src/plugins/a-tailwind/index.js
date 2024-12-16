@@ -5,6 +5,7 @@ import { content } from './fs/content.js'
 import { withGeneratingLayer } from './style/layers.js'
 import { minimizeCSS } from './utils/minimize.js'
 
+// TODO refactor style plugin -> вызывать методы с this, для доступа к config
 export class ATailwind {
 	constructor(config) {
 		this.config = config

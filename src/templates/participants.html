@@ -1,4 +1,4 @@
-<section>
+<section id="participants">
 	<a-container class="participants">
 		<div class="participants__title uppercase text-3xl md:text-4xl leading-120">
 			Участники турнира
@@ -51,40 +51,44 @@
 </section>
 
 <style>
-	.participants {
-		display: grid;
-		gap: 2.5rem;
-
-		.participants__title {
-			grid-area: title;
-		}
-		.participants__slider-controls {
-			grid-area: slider-controls;
-		}
-		.participants__slider-content {
-			grid-area: slider-content;
+	#participants {
+		.participants {
+			display: grid;
+			gap: 2.5rem;
+			.participants__title {
+				grid-area: title;
+			}
+			.participants__slider-controls {
+				grid-area: slider-controls;
+			}
+			.participants__slider-content {
+				grid-area: slider-content;
+			}
 		}
 	}
 
 	body:not(.md) {
-		.participants {
-			grid-template-areas:
-				'title'
-				'slider-content'
-				'slider-controls';
+		#participants {
+			.participants {
+				grid-template-areas:
+					'title'
+					'slider-content'
+					'slider-controls';
+			}
 		}
 	}
 	body.md {
-		.participants {
-			grid-template-areas:
-				'title title title slider-controls'
-				'slider-content slider-content slider-content slider-content';
-		}
-
-		.participants__slider-controls {
-			justify-items: center;
-			align-items: center;
-			align-content: center;
+		#participants {
+			.participants {
+				grid-template-areas:
+					'title title title slider-controls'
+					'slider-content slider-content slider-content slider-content';
+			}
+			.participants__slider-controls {
+				justify-items: center;
+				align-items: center;
+				align-content: center;
+			}
 		}
 	}
 </style>

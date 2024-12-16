@@ -16,15 +16,14 @@ class Stages extends HTMLElement {
 	get #children() {
 		return [...this.children]
 	}
-	get #gridCols() {
+	#gridCols() {
 		return screenValue(JSON.parse(this.getAttribute('a-cols') ?? {})) || 12
 	}
-	get #stageGroupsQuantity() {
+	#stageGroupsQuantity() {
 		return (
 			screenValue(JSON.parse(this.getAttribute('a-stages-group') ?? {})) || 1
 		)
 	}
-
 	cols = (i) => {
 		return screenValue(
 			JSON.parse(this.#children[i]?.getAttribute('cols') ?? '{ "xs": 1 }'),
@@ -47,7 +46,8 @@ class Stages extends HTMLElement {
 	groupClass = (i) => {
 		return `col-span-${this.cols(i)} row-span-${this.rows(i)}`
 	}
-	get #slot() {
+	#slot = () => {
+		console.log('slot')
 		let slot = `<div class="${this.groupClass(0)}"><a-stage-group>`
 		let current = 0
 
@@ -59,7 +59,7 @@ class Stages extends HTMLElement {
 
 			current += this.stageQuantities(i)
 			if (
-				current + this.stageQuantities(i + 1) > this.#stageGroupsQuantity &&
+				current + this.stageQuantities(i + 1) > this.#stageGroupsQuantity() &&
 				i !== this.#children.length - 1
 			) {
 				slot += `</a-stage-group></div><div class="${this.groupClass(i + 1)}"><a-stage-group>`
@@ -75,8 +75,8 @@ class Stages extends HTMLElement {
 		defineShadow.call(
 			this,
 			`
-<div class="max-md:hidden grid grid-cols-${this.#gridCols} gap-5">
-	${this.#slot}
+<div class="max-md:hidden grid grid-cols-${this.#gridCols()} gap-5">
+	${this.#slot()}
 </div>
 
 <div class="md:hidden">
@@ -86,7 +86,7 @@ class Stages extends HTMLElement {
 		 a-id="stages"
 		 slides='{"xs": 1}'
 		>
-		 ${this.#slot}
+		 ${this.#slot()}
 		</a-slider>
 		<a-slider-controls
 		 a-id="stages"

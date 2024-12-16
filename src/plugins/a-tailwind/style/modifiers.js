@@ -7,6 +7,7 @@ const withImportant = (classesWithImportant, c) => {
 	return classesWithImportant
 }
 
+// TODO style plugin change hover & disabled (hadle for => for from keys)
 const withPseudo = (classesWithPseudo, c) => {
 	classesWithPseudo.push(c)
 	classesWithPseudo.push(`hover:${c.replace(/\s{/, ':hover {')}`)
