@@ -122,7 +122,6 @@ transform: translate(${this.#sliderShift}px, 0);
 grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
 	}
 	#update = () => {
-		this.#bus.updateState()
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
 		this.#node.children.forEach((child) =>
 			child.setAttribute('style', this.#childStyle),

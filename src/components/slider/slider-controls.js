@@ -151,6 +151,7 @@ ${aTailwindLink()}`,
 		if (this.#bus.props['controls-variant'] !== 'decimal') {
 			return
 		}
+		console.log(this.#slideCurrent)
 
 		this.#node['decimal-current'].innerHTML = this.#slideCurrent
 		this.#node['decimal-quantity'].innerHTML = this.#bus.state.slide.quantity
