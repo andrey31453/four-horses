@@ -12,7 +12,7 @@
 
 - `/src/components` - web компоненты
 - `/src/plugins/a-tailwind` - генерация стилей ( для перегенерации нужно запустить `npm
-  style`). Конфиг темы:`a-tailwind.conf`
-- `/src/templates` - самостоятельный блок. Вставляются в тело страницы в
-  `/src/main.js` скриптом `/src/composables/bootstrap`
+  style`). Конфиг темы: `/a-tailwind.conf`
+- `/src/templates` - самостоятельные блоки. Вставляются в тело страницы в
+  `/src/main.js`
 - `/src/components` - web компоненты
