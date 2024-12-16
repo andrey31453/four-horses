@@ -1,40 +1,4 @@
-const pxToRem = (sizes) =>
-	Object.entries(sizes).reduce((remSizes, [key, value]) => {
-		remSizes[key] = value / 16 + 'rem'
-		return remSizes
-	}, {})
-
-function hexToRgb1(hex) {
-	let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
-	hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-		return r + r + g + g + b + b
-	})
-
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-	return result
-		? {
-				r: parseInt(result[1], 16),
-				g: parseInt(result[2], 16),
-				b: parseInt(result[3], 16),
-			}
-		: null
-}
-
-const hexToRgb = (hex) => {
-	if (!hex.startsWith('#')) {
-		return hex
-	}
-
-	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-	return result
-		? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`
-		: console.error(`don't correct hex color: ${hex}`)
-}
-const hexToRgbColors = (hexColors) =>
-	Object.entries(hexColors).reduce((rgbColors, [key, value]) => {
-		rgbColors[key] = hexToRgb(value)
-		return rgbColors
-	}, {})
+import { hexToRgb, pxToRem } from './src/plugins/a-tailwind/index.js'
 
 export const config = {
 	screens: {
@@ -85,7 +49,7 @@ export const config = {
 		},
 	},
 
-	colors: hexToRgbColors({
+	colors: hexToRgb({
 		transparent: 'transparent',
 
 		white: '#ffffff',

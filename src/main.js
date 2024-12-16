@@ -2,7 +2,7 @@ import { bootstrap } from '/src/composables/bootstrap'
 import { emptySection } from '/src/utils/helpers/empty-section'
 import { defineTemplate } from '/src/utils/helpers/template'
 import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { useScreenClass } from '/src/composables/screenClass'
+import { useScreenClass } from '/src/composables/screen-class'
 
 import header from '/src/templates/header.html?raw'
 import support from '/src/templates/support.html?raw'

@@ -1,24 +1,27 @@
-На проекте **НЕ ИСПОЛЬЗУЕТСЯ** tailwindcss или какие-либо фреймворки. Вся эта
-бурда самописная))
-
-Да, я просадил продуктивность. И даже знаю где)) Исправить не успел
+На проекте **НЕ ИСПОЛЬЗУЕТСЯ** tailwindcss или какие-либо фреймворки
 
 # install
 
-1. npm i
-2. npm dev / npm build
+1. `npm i`
+2. `npm dev`
+3. http://localhost:5173/
 
-# four-horses
+**Генерация стилей:** `npm style`
 
-- Кнопки на стартовом экране являются якорями и ведут к соответствующим блокам.
-- Добавьте анимацию по своему усмотрению.
+# Folders map
+
+- **/src/components** - web компоненты
+- **/src/plugins/a-tailwind** - генерация стилей ( для перегенерации нужно
+  запустить `npm style` ). Конфиг темы: `a-tailwind.conf`
+- **/src/templates** - самостоятельный блок. Вставляются в тело страницы в
+  `/src/main.js` скриптом `/src/composables/bootstrap`
+- **/src/components** - web компоненты
 
 # mail
 
-Здравствуйте. Cсылки на тестовое:
-
-- github https://github.com/andrey31453/four-horses
-- демка https://andrey31453.github.io/four-horses
+Здравствуйте. Ссылка на тестовое: https://github.com/andrey31453/four-horses.
+Уточню, на проекте НЕ ИСПОЛЬЗУЕТСЯ tailwindcss или какие-либо фреймворки. Все
+это добро самописное
 
 1. Программы
 
@@ -32,11 +35,13 @@
    - Евгений Паромов https://www.youtube.com/@paromovevg
    - Саша Лукин https://www.youtube.com/@sashalukin/videos
 
+   Остальное ищу по мере необходимости
+
 3. Есть github (https://github.com/andrey31453?tab=repositories), но он
    устарел). Есть еще вот такие сайты:
 
-- https://optes.ee/
-- https://sait-myt.ru/
-- https://dizain-kor.ru/
+   - https://optes.ee/
+   - https://sait-myt.ru/
+   - https://dizain-kor.ru/
 
-Но и это я верстал года 2 назад
+   Но и это я верстал 2-3 года назад
