@@ -16,13 +16,11 @@ class Slider extends HTMLElement {
 	}
 
 	#mounted = async () => {
-		// TODO не работает await???
 		this.#initBus()
 		this.#unMounted = await mounted.call(this, this.#render, [
 			this.#updateState,
 			this.#update,
 		])
-
 		this.#emit()
 		this.#onTransition()
 	}

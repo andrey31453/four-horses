@@ -1,7 +1,6 @@
 import { debounce } from './debounce'
 import { delay } from './delay'
 
-// TODO заменить call.this => ()
 export const mounted = async function (
 	cbs = [],
 	listenerCbs = [],
