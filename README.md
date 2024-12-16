@@ -11,7 +11,7 @@
 # Folders map
 
 - `/src/components` - web компоненты
-- `/src/plugins/a-tailwind`` - генерация стилей ( для перегенерации нужно запустить `npm
+- `/src/plugins/a-tailwind` - генерация стилей ( для перегенерации нужно запустить `npm
   style`). Конфиг темы:`a-tailwind.conf`
 - `/src/templates` - самостоятельный блок. Вставляются в тело страницы в
   `/src/main.js` скриптом `/src/composables/bootstrap`
