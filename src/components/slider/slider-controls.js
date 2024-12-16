@@ -151,7 +151,6 @@ ${aTailwindLink()}`,
 		if (this.#bus.props['controls-variant'] !== 'decimal') {
 			return
 		}
-		console.log(this.#slideCurrent)
 
 		this.#node['decimal-current'].innerHTML = this.#slideCurrent
 		this.#node['decimal-quantity'].innerHTML = this.#bus.state.slide.quantity
@@ -164,11 +163,11 @@ ${aTailwindLink()}`,
 		})
 	}
 	#update = () => {
-		this.#updateDecimal()
-		this.#updateDotted()
-
 		this.#node.prev.setAttribute('a-disabled', this.#bus.state.disabled.prev)
 		this.#node.next.setAttribute('a-disabled', this.#bus.state.disabled.next)
+
+		this.#updateDecimal()
+		this.#updateDotted()
 	}
 }
 customElements.define('a-slider-controls', SliderControls)

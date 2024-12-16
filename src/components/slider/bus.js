@@ -29,9 +29,8 @@ class SliderBus {
 		return screenValue(this.props.slides)
 	}
 
-	updateState = () => {
-		store.defineState(this.#id, this.#ctx)
-		store.update(this.#id, this.#ctx)
+	updateQuantity = (quantity) => {
+		store.state(this.#id).slide.quantity = quantity
 		this.#fixState()
 	}
 	#fixState = () => {

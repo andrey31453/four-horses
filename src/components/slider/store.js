@@ -68,9 +68,6 @@ class Store {
 			},
 			ctx,
 		}
-
-		console.log(ctx)
-		console.log(ctx.children.length)
 	}
 }
 export const store = new Store()

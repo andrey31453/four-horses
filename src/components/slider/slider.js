@@ -18,7 +18,10 @@ class Slider extends HTMLElement {
 	#mounted = async () => {
 		// TODO не работает await???
 		this.#initBus()
-		this.#unMounted = await mounted.call(this, this.#render, this.#update)
+		this.#unMounted = await mounted.call(this, this.#render, [
+			this.#updateState,
+			this.#update,
+		])
 
 		this.#emit()
 		this.#onTransition()
@@ -120,6 +123,9 @@ min-height: ${this.#maxChildHeight}px;`
 max-width: ${this.#containerWidth}px;
 transform: translate(${this.#sliderShift}px, 0);
 grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
+	}
+	#updateState = () => {
+		this.#bus.updateQuantity(this.#node.slider.children.length / 3)
 	}
 	#update = () => {
 		this.#node.slider.setAttribute('style', this.#sliderStyle)
