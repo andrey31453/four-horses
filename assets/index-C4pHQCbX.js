@@ -268,7 +268,7 @@ svg {
 <style>
 	body:not(.md) {
 		#header.header {
-			background-image: url('/four-horses/images/banner-mobile.png');
+			background-image: url('/images/banner-mobile.png');
 			background-position: 100% bottom;
 			background-size: 100% auto;
 			background-repeat: no-repeat;
@@ -276,7 +276,7 @@ svg {
 	}
 	body.md {
 		#header.header {
-			background-image: url('/four-horses/images/banner-desktop.png');
+			background-image: url('/images/banner-desktop.png');
 			background-position: center center;
 			background-size: auto 100%;
 			background-repeat: no-repeat;
@@ -328,7 +328,7 @@ svg {
 <style>
 	#support {
 		.support__image {
-			background-image: url('/four-horses/images/support.png');
+			background-image: url('/images/support.png');
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: contain;
@@ -397,7 +397,7 @@ svg {
 <style>
 	#about.about {
 		.about__image {
-			background-image: url('images/about.png');
+			background-image: url('/images/about.png');
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: contain;
@@ -474,7 +474,7 @@ svg {
 				z-index: 10;
 				inset: 0;
 
-				background-image: url('/four-horses/images/airplane.png');
+				background-image: url('/images/airplane.png');
 				background-repeat: no-repeat;
 				background-size: contain;
 				background-position: center right;
