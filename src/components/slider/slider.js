@@ -140,6 +140,7 @@ grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
 	#forceUpdate = () => {
 		nextTick(
 			[this.#offTransition, this.#update, this.#onTransition],
+			// TODO взять из рут
 			config.vars['animation-duration'].value,
 		)
 	}

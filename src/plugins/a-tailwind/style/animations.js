@@ -62,6 +62,10 @@ const fromLeft = {
     transform: translateX(-75%);
     opacity: 0;
   }
+  25% {
+    transform: translateX(-60%);
+    opacity: 0.5;
+  }
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -76,6 +80,10 @@ const fromRight = {
   0% {
     transform: translateX(75%);
     opacity: 0;
+  }
+  25% {
+    transform: translateX(60%);
+    opacity: 0.5;
   }
   100% {
     transform: translateX(0);
