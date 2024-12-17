@@ -6,7 +6,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"build": "vite build --base=four-horses",
 		"deploy": "gh-pages -d dist",
 		"style": "node a-tailwind.js"
 	},
