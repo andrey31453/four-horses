@@ -20,7 +20,8 @@
 		</div>
 		<!-- !title -->
 
-		<div class="airplane">
+		<div class="relative">
+			<div class="airplane hover:animate-bounce-sm"></div>
 			<a-stages
 				a-cols='{ "xs":2, "lg": 3 }'
 				a-stages-group='{ "xs":2, "md": 1 }'
@@ -57,27 +58,22 @@
 <style>
 	#stages {
 		.airplane {
-			position: relative;
-			z-index: 0;
+			position: absolute;
+			content: '';
 
-			&:before {
-				position: absolute;
-				content: '';
+			z-index: 10;
+			inset: 0;
 
-				z-index: 10;
-				inset: 0;
-
-				background-image: url(/images/airplane.png);
-				background-repeat: no-repeat;
-				background-size: contain;
-				background-position: center right;
-			}
+			background-image: url(/images/airplane.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center right;
 		}
 	}
 
 	body:not(.md) {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: 0;
 				left: 0;
 				right: 0;
@@ -88,7 +84,7 @@
 	}
 	body.md {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: -40%;
 				left: 60%;
 				right: -50px;
@@ -99,7 +95,7 @@
 	}
 	body.lg {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: 40%;
 				left: 60%;
 				right: -50px;

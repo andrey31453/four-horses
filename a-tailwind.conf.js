@@ -104,11 +104,11 @@ export const config = {
 	},
 
 	content: [
-		'./index.html',
-		'.@/main.js',
-		'.@/components',
-		'.@/templates',
-		'.@/composables',
+		'index.html',
+		'src/main.js',
+		'src/components',
+		'src/templates',
+		'src/composables',
 	],
 	safeList: [...Array(12).keys()]
 		.map((i) => [

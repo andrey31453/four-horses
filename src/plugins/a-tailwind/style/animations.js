@@ -1,6 +1,6 @@
 import { layers, withLayer } from './layers.js'
 
-const baseStyle = [
+const baseClasses = [
 	`transition {transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: var(--animation-duration);}`,
 	`animate-once {animation-iteration-count: 0;}`,
 	`animate-infinity {animation-iteration-count: infinite;}`,
@@ -28,6 +28,20 @@ const bounce = {
   }
   50% {
     transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}`,
+}
+const bounceSM = {
+	class: `animate-bounce-sm {animation: bounce-sm 1.5s infinite;}`,
+	style: `
+@keyframes bounce-sm {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-12%);
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }`,
@@ -62,10 +76,6 @@ const fromLeft = {
     transform: translateX(-75%);
     opacity: 0;
   }
-  25% {
-    transform: translateX(-60%);
-    opacity: 0.5;
-  }
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -80,10 +90,6 @@ const fromRight = {
   0% {
     transform: translateX(75%);
     opacity: 0;
-  }
-  25% {
-    transform: translateX(60%);
-    opacity: 0.5;
   }
   100% {
     transform: translateX(0);
@@ -135,7 +141,6 @@ export const animationStyle = () =>
 	withLayer(
 		layers.base,
 		[
-			baseStyle,
 			ping.style,
 			pulse.style,
 			spin.style,
@@ -144,9 +149,11 @@ export const animationStyle = () =>
 			fromRight.style,
 			fromTop.style,
 			fromBottom.style,
+			bounceSM.style,
 		].join(''),
 	)
 export const animationClasses = (animations) => [
+	baseClasses,
 	ping.class,
 	pulse.class,
 	spin.class,
@@ -155,5 +162,6 @@ export const animationClasses = (animations) => [
 	fromRight.class,
 	fromTop.class,
 	fromBottom.class,
+	bounceSM.class,
 	animationDurationClasses(animations.durations),
 ]

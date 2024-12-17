@@ -1,7 +1,7 @@
 import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
 import { defineShadow } from '@/utils/helpers/shadow'
 import { mounted } from '@/utils/helpers/mounted'
-import { config } from '@/a-tailwind.conf.js'
+import { config } from '../../../a-tailwind.conf.js'
 import { nextTick } from '@/utils/helpers/next-tick'
 import { isFunction } from '@/utils/helpers/type.js'
 import { keys } from './config'

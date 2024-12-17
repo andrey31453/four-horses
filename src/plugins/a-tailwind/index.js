@@ -58,13 +58,14 @@ export class ATailwind {
 
 		fs.writeFileSync(
 			link,
-			minimizeCSS(defineStyle(this.config).join('') + layerClasses.join('')),
+			// minimizeCSS(defineStyle(this.config).join('') + layerClasses.join('')),
+			defineStyle(this.config).join('') + layerClasses.join(''),
 		)
 
 		console.log(
 			`Стили были сгенерированы: ${
 				Math.round((new Date().getTime() - duration) / 10 ** 2) / 10
-			}c`,
+			} cек`,
 		)
 	}
 }
