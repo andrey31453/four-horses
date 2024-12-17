@@ -1,6 +1,6 @@
 На проекте `НЕ ИСПОЛЬЗУЕТСЯ` tailwindcss или какие-либо другие фреймворки
 
-# install
+# install1
 
 1. `npm i`
 2. `npm dev`
