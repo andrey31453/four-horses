@@ -14,6 +14,7 @@ export const defineStyle = (config) => [
 	defineLayers(layers),
 
 	// разнести по своим подпапкам
+	defineVars(config.screens, 'screen'),
 	defineVars(config.colors),
 	defineVars(config.animations.vars),
 	defineVars(config.font.sizes, 'text'),

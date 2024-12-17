@@ -1,8 +1,8 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { defineShadow } from '/src/utils/helpers/shadow'
-import { mounted } from '/src/utils/helpers/mounted.js'
-import { screenValue } from '/src/utils/helpers/screen-value.js'
-import { attributeJSON } from '../../utils/helpers/attribute.js'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { mounted } from '@/utils/helpers/mounted.js'
+import { screenValue } from '@/utils/helpers/screen-value.js'
+import { attributeJSON } from '@/utils/helpers/attribute.js'
 
 class Stages extends HTMLElement {
 	constructor() {

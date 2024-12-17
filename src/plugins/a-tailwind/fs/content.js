@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import { minimize } from '../utils/minimize.js'
+import { minimize } from '@/utils/minimize.js'
 
 const parseData = (path) => {
 	if (!fs.existsSync(path)) return ''

@@ -1,11 +1,11 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { defineShadow } from '/src/utils/helpers/shadow'
-import { mounted } from '/src/utils/helpers/mounted'
-import { config } from '/Users/webserfer/repositories/bastion/four-horses/a-tailwind.conf'
-import { nextTick } from '/src/utils/helpers/next-tick'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { mounted } from '@/utils/helpers/mounted'
+import { config } from '@/a-tailwind.conf.js'
+import { nextTick } from '@/utils/helpers/next-tick'
+import { isFunction } from '@/utils/helpers/type.js'
 import { keys } from './config'
 import { sliderBus } from './bus'
-import { isFunction } from '/src/utils/helpers/type.js'
 
 class Slider extends HTMLElement {
 	#bus

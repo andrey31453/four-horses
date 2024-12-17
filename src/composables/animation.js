@@ -1,7 +1,4 @@
-import {
-	attributeBoolean,
-	attributeString,
-} from '../utils/helpers/attribute.js'
+import { attributeBoolean, attributeString } from '@/utils/helpers/attribute.js'
 
 const animateNames = {
 	spin: 'animate-spin',

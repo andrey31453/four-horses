@@ -1,4 +1,4 @@
-import { windowCallback } from '/src/composables/callback'
+import { windowCallback } from '@/composables/callback'
 
 class Participant extends HTMLElement {
 	constructor() {

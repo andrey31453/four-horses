@@ -1,4 +1,4 @@
-import { defineShadow } from '/src/utils/helpers/shadow.js'
+import { defineShadow } from '@/utils/helpers/shadow.js'
 
 class Shadow extends HTMLElement {
 	constructor() {

@@ -1,4 +1,4 @@
-import { throttle } from '/src/utils/helpers/debounce'
+import { throttle } from '@/utils/helpers/debounce'
 
 let windowOns = []
 export const windowCallback = {

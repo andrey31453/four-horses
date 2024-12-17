@@ -1,4 +1,4 @@
-const defaultDelay = 100
+const defaultDelay = 200
 
 export const debounce = (callback, delay = defaultDelay) => {
 	let timeoutId = null

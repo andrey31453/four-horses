@@ -1,23 +1,25 @@
-import { bootstrap } from '/src/composables/bootstrap'
-import { emptySection } from '/src/utils/helpers/empty-section'
-import { defineTemplate } from '/src/utils/helpers/template'
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { useScreenClass } from '/src/composables/screen-class'
+import { bootstrap } from '@/composables/bootstrap'
+import { emptySection } from '@/utils/helpers/empty-section'
+import { defineTemplate } from '@/utils/helpers/template'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { useScreenClass } from '@/composables/screen-class'
 
-import header from '/src/templates/header.html?raw'
-import support from '/src/templates/support.html?raw'
-import about from '/src/templates/about.html?raw'
-import stages from '/src/templates/stages.html?raw'
-import footer from '/src/templates/footer.html?raw'
-import runningLine from '/src/templates/running-line.html?raw'
-import participants from '/src/templates/participants.html?raw'
-import { useScrollTo } from './composables/scroll-to.js'
-import { useAnimation } from './composables/animation.js'
+import header from '@/templates/header.html?raw'
+import support from '@/templates/support.html?raw'
+import about from '@/templates/about.html?raw'
+import stages from '@/templates/stages.html?raw'
+import footer from '@/templates/footer.html?raw'
+import runningLine from '@/templates/running-line.html?raw'
+import participants from '@/templates/participants.html?raw'
+import { useScrollTo } from '@/composables/scroll-to.js'
+import { useAnimation } from '@/composables/animation.js'
+import { useViteBase } from '@/composables/vite-base.js'
 
 bootstrap()
 	.use(useScreenClass)
 	.use(useScrollTo)
 	.use(useAnimation)
+	.use(useViteBase)
 	.template(defineTemplate('div', null, aTailwindLink()))
 	.template(
 		defineTemplate(
@@ -44,14 +46,3 @@ bootstrap()
 		),
 	)
 	.mount('#app')
-
-const useBgImage = () => {
-	document.querySelectorAll('[a-bg-image]').forEach((el) => {
-		el.style.backgroundImage =
-			`url(${import.meta.env.BASE_URL}/${el.getAttribute('a-bg-image')})`.replace(
-				/\/\//,
-				'/',
-			)
-	})
-}
-useBgImage()

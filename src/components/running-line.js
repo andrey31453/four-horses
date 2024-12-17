@@ -1,6 +1,6 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { defineShadow } from '/src/utils/helpers/shadow'
-import { debounce } from '/src/utils/helpers/debounce'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { debounce } from '@/utils/helpers/debounce'
 
 class RunningLine extends HTMLElement {
 	constructor() {

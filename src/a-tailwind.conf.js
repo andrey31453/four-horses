@@ -105,10 +105,10 @@ export const config = {
 
 	content: [
 		'./index.html',
-		'./src/main.js',
-		'./src/components',
-		'./src/templates',
-		'./src/composables',
+		'.@/main.js',
+		'.@/components',
+		'.@/templates',
+		'.@/composables',
 	],
 	safeList: [...Array(12).keys()]
 		.map((i) => [

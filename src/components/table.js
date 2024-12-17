@@ -1,7 +1,7 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { isScreen } from '/src/utils/helpers/screen'
-import { defineShadow } from '../utils/helpers/shadow'
-import { debounce } from '../utils/helpers/debounce'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { isScreen } from '@/utils/helpers/screen'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { debounce } from '@/utils/helpers/debounce'
 
 class Table extends HTMLElement {
 	constructor() {

@@ -1,7 +1,7 @@
 import logo from './icons/logo.svg?raw'
 import chevronRight from './icons/chevron-right.svg?raw'
-import { defineShadow } from '/src/utils/helpers/shadow'
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
 
 const icons = {
 	'chevron-right': chevronRight,

@@ -1,5 +1,5 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { defineShadow } from '/src/utils/helpers/shadow.js'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow.js'
 
 class Stage extends HTMLElement {
 	constructor() {

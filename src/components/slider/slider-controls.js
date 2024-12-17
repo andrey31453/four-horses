@@ -1,10 +1,11 @@
-import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
-import { defineShadow } from '/src/utils/helpers/shadow'
-import { windowCallback } from '/src/composables/callback'
+import { aTailwindLink } from '@/utils/helpers/a-tailwind-link'
+import { defineShadow } from '@/utils/helpers/shadow'
+import { windowCallback } from '@/composables/callback'
 import { keys } from './config'
 import { sliderBus } from './bus'
-import { mounted } from '/src/utils/helpers/mounted.js'
-import { isFunction } from '/src/utils/helpers/type.js'
+import { mounted } from '@/utils/helpers/mounted.js'
+import { isFunction } from '@/utils/helpers/type.js'
+import { nextTick } from '@/utils/helpers/next-tick.js'
 
 class SliderControls extends HTMLElement {
 	#bus
@@ -19,7 +20,7 @@ class SliderControls extends HTMLElement {
 		this.#unMounted = await mounted.call(
 			this,
 			this.#render,
-			this.#update,
+			[this.#forceUpdate, this.#update],
 			() => true,
 		)
 		this.#emit()
@@ -40,8 +41,8 @@ class SliderControls extends HTMLElement {
 			next: this.shadowRoot.getElementById('next'),
 			'decimal-current': this.shadowRoot.getElementById('decimal-current'),
 			'decimal-quantity': this.shadowRoot.getElementById('decimal-quantity'),
-			dots: this.shadowRoot.querySelectorAll('.js__dot'),
-			['dot-animates']: this.shadowRoot.querySelectorAll('.js__dot-animate'),
+			dots: () => this.shadowRoot.querySelectorAll('.js__dot'),
+			'dots-wrapper': this.shadowRoot.querySelector('.js__dots-wrapper'),
 		}
 	}
 
@@ -63,10 +64,15 @@ class SliderControls extends HTMLElement {
 	<div class="size-2.5 rounded-full bg-secondary-800"></div>
 </div>`
 	}
+	#dotsWithoutWrapper = () => {
+		return [...Array(this.#bus.state.slide.quantity).keys()]
+			.map(this.#dot)
+			.join('')
+	}
 	#dots = () => {
 		return `
-<div class="flex justify-center items-center gap-1.5 text-golos transition">
-	${[...Array(this.#bus.state.slide.quantity).keys()].map(this.#dot).join('')}
+<div class="js__dots-wrapper flex justify-center items-center gap-1.5 text-golos transition">
+	${this.#dotsWithoutWrapper()}
 </div>`
 	}
 	#fixSlideCurrent = (slideCurrent) => {
@@ -163,7 +169,7 @@ ${aTailwindLink()}`,
 		this.#node['decimal-quantity'].innerHTML = this.#bus.state.slide.quantity
 	}
 	#updateDotted = () => {
-		this.#node.dots.forEach((item, idx) => {
+		this.#node.dots().forEach((item, idx) => {
 			idx === this.#bus.state.slide.current
 				? item.classList.remove('hidden')
 				: item.classList.add('hidden')
@@ -175,6 +181,10 @@ ${aTailwindLink()}`,
 
 		this.#updateDecimal()
 		this.#updateDotted()
+	}
+	#forceUpdate = async () => {
+		if (!this.#node['dots-wrapper']) return
+		this.#node['dots-wrapper'].innerHTML = this.#dotsWithoutWrapper()
 	}
 }
 customElements.define('a-slider-controls', SliderControls)

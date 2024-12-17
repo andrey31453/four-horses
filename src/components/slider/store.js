@@ -1,7 +1,4 @@
-import {
-	attributeBoolean,
-	attributeJSON,
-} from '/src/utils/helpers/attribute.js'
+import { attributeBoolean, attributeJSON } from '@/utils/helpers/attribute.js'
 
 const _store = {
 	props: {},

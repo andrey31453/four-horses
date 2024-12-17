@@ -2,12 +2,12 @@
 	"name": "four-horses",
 	"version": "1.0.0",
 	"description": "",
-	"main": "a-tailwind.conf.js",
+	"main": "src/a-tailwind.conf.js",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build --base=four-horses",
-		"style": "node a-tailwind.js",
+		"style": "node src/a-tailwind.js",
 		"deploy": "gh-pages -d dist"
 	},
 	"keywords": [],

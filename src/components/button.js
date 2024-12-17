@@ -1,4 +1,4 @@
-import { windowCallback } from '/src/composables/callback'
+import { windowCallback } from '@/composables/callback'
 
 const defaultClasses =
 	'text-golos font-medium transition flex justify-center items-center cursor-pointer'

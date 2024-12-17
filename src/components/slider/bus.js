@@ -1,6 +1,6 @@
-import { nextTick } from '/src/utils/helpers/next-tick'
+import { nextTick } from '@/utils/helpers/next-tick'
 import { store } from './store'
-import { screenValue } from '/src/utils/helpers/screen-value.js'
+import { screenValue } from '@/utils/helpers/screen-value.js'
 
 class SliderBus {
 	#id

@@ -1,4 +1,4 @@
-import { config } from '/Users/webserfer/repositories/bastion/four-horses/a-tailwind.conf'
+import { config } from '@/a-tailwind.conf.js'
 
 export const isScreen = (key) => {
 	if (config.screens[key] === undefined) {
