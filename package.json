@@ -6,7 +6,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build && gh-pages -d dist",
+		"build": "vite build",
+		"deploy": "vgh-pages -d dist",
 		"style": "node a-tailwind.js"
 	},
 	"keywords": [],
