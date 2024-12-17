@@ -46,7 +46,7 @@ ${x()}
     transform: translateX(calc(-100% - 100px));
   }
 }
-</style>`)};customElements.define("a-running-line",E2);const G1=(n=100)=>new Promise((s,e)=>{setTimeout(()=>void s(),n)}),Q1=async function(n=[],s=[],e=null){const i=s?[s].flat().map(p=>P1(p.bind(this))):[],r=()=>{i.forEach(p=>{window.removeEventListener("resize",p)})},l={quantity:0,max:10},H=async function(){return l.quantity++,l.quantity>l.max?console.error("Превышено время ожидания компонента: ",this):(e?!e.call(this):!this.querySelector("*"))?(await G1(),await H.call(this)):(n&&[n].flat().forEach(p=>{p.call(this)}),i.forEach(p=>{p.call(this),window.addEventListener("resize",p)}),r)};return await G1(),await H.call(this)},M2=n=>Object.entries(n).reduce((s,[e,i])=>(s[e]=i/16+"rem",s),{}),A2=n=>{if(!n.startsWith("#"))return n;const s=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(n);return s?`${parseInt(s[1],16)}, ${parseInt(s[2],16)}, ${parseInt(s[3],16)}`:console.error(`don't correct hex color: ${n}`)},k2=n=>Object.entries(n).reduce((s,[e,i])=>(s[e]=A2(i),s),{}),t1={screens:{xs:0,sm:640,md:768,lg:1024,xl:1280},sizes:{quantity:140},grid:{cols:12},font:{bold:{thin:100,extralight:200,light:300,normal:400,medium:500,semibold:600,bold:700,extrabold:800,black:900},sizes:M2({xs:16,sm:18,base:20,lg:22,xl:24,"2xl":28,"3xl":36,"4xl":54,"5xl":60}),leadings:{min:50,max:150,step:5}},colors:k2({transparent:"transparent",white:"#ffffff",black:"#313131",red:"#f54932",yellow:"#fbce51",blue:"#3057a2",primary:"#f54932",surface:"#e9ded4","secondary-200":"#585653","secondary-300":"#6f6f6f","secondary-400":"#7b7672","secondary-500":"#838383","secondary-600":"#8b8b8b","secondary-700":"#d0d0d0","secondary-800":"#d5d5d5","secondary-900":"#e9ded4"}),animations:{vars:{"animation-duration":{value:100,measurement:"ms"}},durations:{max:4e3,step:100}},content:["./index.html",".@/main.js",".@/components",".@/templates",".@/composables"],safeList:[...Array(12).keys()].map(n=>[`md:grid-cols-${n+1}`,`grid-cols-${n+1}`,`col-span-${n+1}`,`row-span-${n+1}`]).flat()},Z1=(n,s=0)=>{[n].flat().forEach((e,i)=>setTimeout(e,10*i+s))},n2=n=>typeof n=="function",V={id:"a-id"},O=(n,s,e={})=>{if(!n)return console.error("don't correct target: ",n);const i=n.getAttribute(s);return!i||i===""?e:JSON.parse(n.getAttribute(s)??null)||e},J1=new Map().set("",!0).set("true",!0).set("false",!1).set(null,!1),i2=(n,s)=>{if(!n)return console.error("don't correct target: ",n);const e=n.getAttribute(s);return J1.has(e)?J1.get(e):console.error("don't correct props: ",s)},T2=(n,s,e)=>n?n.getAttribute(s)??e:console.error("don't correct target: ",n),u={props:{},state:{},cbs:{}};var o1,d1;class _2{constructor(){c(this,"props",s=>u.props[s]);c(this,"state",s=>u.state[s]);c(this,"cbs",s=>u.cbs[s]);c(this,"off",s=>{u.cbs[s]=[]});a(this,o1,s=>{u.props[s]=null,u.state[s]=null,u.cbs[s]=[]});a(this,d1,(s,e)=>{u.props[s]={"controls-variant":e.getAttribute("controls-variant")??"dots",infinity:i2(e,"infinity"),"auto-change":+e.getAttribute("auto-change"),slides:O(e,"slides",{xs:1,sm:2,md:3,xl:4})}});c(this,"defineState",(s,e)=>{if(u.props[s].infinity){u.state[s]={slide:{current:0,quantity:e.children.length,min:-1,max:e.children.length},ctx:e};return}u.state[s]={slide:{current:0,quantity:e.children.length,min:0,max:e.children.length-1},ctx:e}})}define(s,e){t(this,o1).call(this,s),t(this,d1).call(this,s,e),this.defineState(s,e)}update(s){u.state[s].disabled={prev:!u.props[s].infinity&&u.state[s].slide.current===u.state[s].slide.min,next:!u.props[s].infinity&&u.state[s].slide.current===u.state[s].slide.max}}}o1=new WeakMap,d1=new WeakMap;const f=new _2,W1=n=>t1.screens[n]===void 0?console.error(`don't correct screen key: ${n}`):document.documentElement.clientWidth>=t1.screens[n],R=n=>Object.entries(n).reduce((s,[e,i])=>W1(e)?i:s,1);var m,l1,k,P,Q,T,c1;class q2{constructor(s,e){a(this,m);a(this,l1);c(this,"updateQuantity",s=>{f.state(t(this,m)).slide.quantity=s,t(this,k).call(this)});a(this,k,()=>{this.state.slide.current<0&&Z1(()=>{this.state.slide.current=this.state.slide.quantity+this.state.slide.current,this.on("force-update")}),this.state.slide.current>this.state.slide.quantity-1&&Z1(()=>{this.state.slide.current=this.state.slide.current-this.state.slide.quantity,this.on("force-update")})});c(this,"emit",(s,e)=>{f.cbs(t(this,m)).push({name:s,cb:e})});c(this,"on",s=>{f.cbs(t(this,m)).filter(({name:e})=>e===s).forEach(({cb:e})=>e())});c(this,"off",()=>{f.off(t(this,m))});c(this,"prev",()=>{t(this,Q).call(this),this.state.slide.current--,f.update(t(this,m)),t(this,k).call(this)});c(this,"next",()=>{t(this,Q).call(this),t(this,P).call(this)});a(this,P,()=>{this.state.slide.current++,f.update(t(this,m)),t(this,k).call(this)});a(this,Q,()=>{this.props["auto-change"]&&(clearTimeout(this.state.timeout),t(this,T).call(this))});a(this,T,()=>{this.state.timeout=setTimeout(()=>{t(this,P).call(this),this.on("update"),t(this,T).call(this)},1e3*this.props["auto-change"])});a(this,c1,()=>{if(this.props["auto-change"]){if(!this.props.infinity)return console.error("Auto-сhange можно применять только вместе с infinity");t(this,T).call(this)}});w(this,m,s),e&&(w(this,l1,e),f.define(s,e),f.update(s),t(this,c1).call(this,s))}get state(){return f.state(t(this,m))}get props(){return f.props(t(this,m))}get cbs(){return f.cbs(t(this,m))}get cols(){return R(this.props.slides)}}m=new WeakMap,l1=new WeakMap,k=new WeakMap,P=new WeakMap,Q=new WeakMap,T=new WeakMap,c1=new WeakMap;const S1={},a2=(n,s)=>(S1[n]||(S1[n]=new q2(n,s)),S1[n]);var L,_,C1,u1,h1,o,M,A,p1,q,r2,m1,o2,O1,Y,R1,d2,l2,g1,S,W,f1,L1;class S2 extends HTMLElement{constructor(){super();a(this,o);a(this,L);a(this,_);a(this,C1,async()=>{t(this,u1).call(this),w(this,_,await Q1.call(this,t(this,m1),[t(this,g1),t(this,S)])),t(this,h1).call(this),t(this,W).call(this)});a(this,u1,()=>{w(this,L,a2(this.getAttribute(V.id),this))});a(this,h1,()=>{t(this,L).emit("update",t(this,S)),t(this,L).emit("force-update",t(this,L1))});a(this,p1,(e,i)=>`
+</style>`)};customElements.define("a-running-line",E2);const G1=(n=100)=>new Promise((s,e)=>{setTimeout(()=>void s(),n)}),Q1=async function(n=[],s=[],e=null){const i=s?[s].flat().map(p=>P1(p.bind(this))):[],r=()=>{i.forEach(p=>{window.removeEventListener("resize",p)})},l={quantity:0,max:10},H=async function(){return l.quantity++,l.quantity>l.max?console.error("Превышено время ожидания компонента: ",this):(e?!e.call(this):!this.querySelector("*"))?(await G1(),await H.call(this)):(n&&[n].flat().forEach(p=>{p.call(this)}),i.forEach(p=>{p.call(this),window.addEventListener("resize",p)}),r)};return await G1(),await H.call(this)},M2=n=>Object.entries(n).reduce((s,[e,i])=>(s[e]=i/16+"rem",s),{}),A2=n=>{if(!n.startsWith("#"))return n;const s=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(n);return s?`${parseInt(s[1],16)}, ${parseInt(s[2],16)}, ${parseInt(s[3],16)}`:console.error(`don't correct hex color: ${n}`)},k2=n=>Object.entries(n).reduce((s,[e,i])=>(s[e]=A2(i),s),{}),t1={screens:{xs:0,sm:640,md:768,lg:1024,xl:1280},sizes:{quantity:140},grid:{cols:12},font:{bold:{thin:100,extralight:200,light:300,normal:400,medium:500,semibold:600,bold:700,extrabold:800,black:900},sizes:M2({xs:16,sm:18,base:20,lg:22,xl:24,"2xl":28,"3xl":36,"4xl":54,"5xl":60}),leadings:{min:50,max:150,step:5}},colors:k2({transparent:"transparent",white:"#ffffff",black:"#313131",red:"#f54932",yellow:"#fbce51",blue:"#3057a2",primary:"#f54932",surface:"#e9ded4","secondary-200":"#585653","secondary-300":"#6f6f6f","secondary-400":"#7b7672","secondary-500":"#838383","secondary-600":"#8b8b8b","secondary-700":"#d0d0d0","secondary-800":"#d5d5d5","secondary-900":"#e9ded4"}),animations:{vars:{"animation-duration":{value:100,measurement:"ms"}},durations:{max:4e3,step:100}},content:["index.html","src/main.js","src/components","src/templates","src/composables"],safeList:[...Array(12).keys()].map(n=>[`md:grid-cols-${n+1}`,`grid-cols-${n+1}`,`col-span-${n+1}`,`row-span-${n+1}`]).flat()},Z1=(n,s=0)=>{[n].flat().forEach((e,i)=>setTimeout(e,10*i+s))},n2=n=>typeof n=="function",V={id:"a-id"},O=(n,s,e={})=>{if(!n)return console.error("don't correct target: ",n);const i=n.getAttribute(s);return!i||i===""?e:JSON.parse(n.getAttribute(s)??null)||e},J1=new Map().set("",!0).set("true",!0).set("false",!1).set(null,!1),i2=(n,s)=>{if(!n)return console.error("don't correct target: ",n);const e=n.getAttribute(s);return J1.has(e)?J1.get(e):console.error("don't correct props: ",s)},T2=(n,s,e)=>n?n.getAttribute(s)??e:console.error("don't correct target: ",n),u={props:{},state:{},cbs:{}};var o1,d1;class _2{constructor(){c(this,"props",s=>u.props[s]);c(this,"state",s=>u.state[s]);c(this,"cbs",s=>u.cbs[s]);c(this,"off",s=>{u.cbs[s]=[]});a(this,o1,s=>{u.props[s]=null,u.state[s]=null,u.cbs[s]=[]});a(this,d1,(s,e)=>{u.props[s]={"controls-variant":e.getAttribute("controls-variant")??"dots",infinity:i2(e,"infinity"),"auto-change":+e.getAttribute("auto-change"),slides:O(e,"slides",{xs:1,sm:2,md:3,xl:4})}});c(this,"defineState",(s,e)=>{if(u.props[s].infinity){u.state[s]={slide:{current:0,quantity:e.children.length,min:-1,max:e.children.length},ctx:e};return}u.state[s]={slide:{current:0,quantity:e.children.length,min:0,max:e.children.length-1},ctx:e}})}define(s,e){t(this,o1).call(this,s),t(this,d1).call(this,s,e),this.defineState(s,e)}update(s){u.state[s].disabled={prev:!u.props[s].infinity&&u.state[s].slide.current===u.state[s].slide.min,next:!u.props[s].infinity&&u.state[s].slide.current===u.state[s].slide.max}}}o1=new WeakMap,d1=new WeakMap;const f=new _2,W1=n=>t1.screens[n]===void 0?console.error(`don't correct screen key: ${n}`):document.documentElement.clientWidth>=t1.screens[n],R=n=>Object.entries(n).reduce((s,[e,i])=>W1(e)?i:s,1);var m,l1,k,P,Q,T,c1;class q2{constructor(s,e){a(this,m);a(this,l1);c(this,"updateQuantity",s=>{f.state(t(this,m)).slide.quantity=s,t(this,k).call(this)});a(this,k,()=>{this.state.slide.current<0&&Z1(()=>{this.state.slide.current=this.state.slide.quantity+this.state.slide.current,this.on("force-update")}),this.state.slide.current>this.state.slide.quantity-1&&Z1(()=>{this.state.slide.current=this.state.slide.current-this.state.slide.quantity,this.on("force-update")})});c(this,"emit",(s,e)=>{f.cbs(t(this,m)).push({name:s,cb:e})});c(this,"on",s=>{f.cbs(t(this,m)).filter(({name:e})=>e===s).forEach(({cb:e})=>e())});c(this,"off",()=>{f.off(t(this,m))});c(this,"prev",()=>{t(this,Q).call(this),this.state.slide.current--,f.update(t(this,m)),t(this,k).call(this)});c(this,"next",()=>{t(this,Q).call(this),t(this,P).call(this)});a(this,P,()=>{this.state.slide.current++,f.update(t(this,m)),t(this,k).call(this)});a(this,Q,()=>{this.props["auto-change"]&&(clearTimeout(this.state.timeout),t(this,T).call(this))});a(this,T,()=>{this.state.timeout=setTimeout(()=>{t(this,P).call(this),this.on("update"),t(this,T).call(this)},1e3*this.props["auto-change"])});a(this,c1,()=>{if(this.props["auto-change"]){if(!this.props.infinity)return console.error("Auto-сhange можно применять только вместе с infinity");t(this,T).call(this)}});w(this,m,s),e&&(w(this,l1,e),f.define(s,e),f.update(s),t(this,c1).call(this,s))}get state(){return f.state(t(this,m))}get props(){return f.props(t(this,m))}get cbs(){return f.cbs(t(this,m))}get cols(){return R(this.props.slides)}}m=new WeakMap,l1=new WeakMap,k=new WeakMap,P=new WeakMap,Q=new WeakMap,T=new WeakMap,c1=new WeakMap;const S1={},a2=(n,s)=>(S1[n]||(S1[n]=new q2(n,s)),S1[n]);var L,_,C1,u1,h1,o,M,A,p1,q,r2,m1,o2,O1,Y,R1,d2,l2,g1,S,W,f1,L1;class S2 extends HTMLElement{constructor(){super();a(this,o);a(this,L);a(this,_);a(this,C1,async()=>{t(this,u1).call(this),w(this,_,await Q1.call(this,t(this,m1),[t(this,g1),t(this,S)])),t(this,h1).call(this),t(this,W).call(this)});a(this,u1,()=>{w(this,L,a2(this.getAttribute(V.id),this))});a(this,h1,()=>{t(this,L).emit("update",t(this,S)),t(this,L).emit("force-update",t(this,L1))});a(this,p1,(e,i)=>`
 <div
 	class="child flex flex-col items-center h-full" 
 	style="${t(this,o,O1)}"
@@ -427,7 +427,8 @@ svg {
 		</div>
 		<!-- !title -->
 
-		<div class="airplane">
+		<div class="relative">
+			<div class="airplane hover:animate-bounce-sm"></div>
 			<a-stages
 				a-cols='{ "xs":2, "lg": 3 }'
 				a-stages-group='{ "xs":2, "md": 1 }'
@@ -464,27 +465,22 @@ svg {
 <style>
 	#stages {
 		.airplane {
-			position: relative;
-			z-index: 0;
+			position: absolute;
+			content: '';
 
-			&:before {
-				position: absolute;
-				content: '';
+			z-index: 10;
+			inset: 0;
 
-				z-index: 10;
-				inset: 0;
-
-				background-image: url(/images/airplane.png);
-				background-repeat: no-repeat;
-				background-size: contain;
-				background-position: center right;
-			}
+			background-image: url(/images/airplane.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center right;
 		}
 	}
 
 	body:not(.md) {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: 0;
 				left: 0;
 				right: 0;
@@ -495,7 +491,7 @@ svg {
 	}
 	body.md {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: -40%;
 				left: 60%;
 				right: -50px;
@@ -506,7 +502,7 @@ svg {
 	}
 	body.lg {
 		#stages {
-			.airplane:before {
+			.airplane {
 				top: 40%;
 				left: 60%;
 				right: -50px;
@@ -634,4 +630,4 @@ svg {
 		}
 	}
 </style>
-`,ot=n=>{var s;(s=document.querySelector(n))==null||s.scrollIntoView({behavior:"smooth",block:"start"})},dt=()=>{B.emit("scroll-to",ot)},lt={spin:"animate-spin",bounce:"animate-bounce",pulse:"animate-pulse",ping:"animate-ping","from-left":"animate-from-left","from-right":"animate-from-right","from-bottom":"animate-from-bottom","from-top":"animate-from-top"},ct=()=>{document.querySelectorAll("[a-animation]").forEach(n=>{n.classList.add("invisible");const s={name:T2(n,"a-animation","pulse"),infinity:i2(n,"a-animation-infinity")};new IntersectionObserver((e,i)=>{e[0].isIntersecting&&(n.classList.remove("invisible"),n.classList.add(lt[s.name]),i.unobserve(n))},{threshold:.25}).observe(n)})},Ct=()=>{document.querySelectorAll("style").forEach(n=>{console.log("/four-horses"),console.log("production"),n.innerHTML=n.innerHTML.replace(/url\(/g,"url(/four-horses").replace(/\/{2,}/g,"/")})};J2().use(tt).use(dt).use(ct).use(Ct).template(U1("div",null,x())).template(U1("div",{id:"main",class:"bg-white text-black text-merriweather"},[et,Y1,Z("h-14 md:h-24"),st,Z("h-6 md:h-16"),nt,Z("h-30 md:h-50"),it,Z("h-30 md:h-50"),rt,Z("h-25 md:h-35"),Y1,at])).mount("#app");
+`,ot=n=>{var s;(s=document.querySelector(n))==null||s.scrollIntoView({behavior:"smooth",block:"start"})},dt=()=>{B.emit("scroll-to",ot)},lt={spin:"animate-spin",bounce:"animate-bounce",pulse:"animate-pulse",ping:"animate-ping","from-left":"animate-from-left","from-right":"animate-from-right","from-bottom":"animate-from-bottom","from-top":"animate-from-top"},ct=()=>{document.querySelectorAll("[a-animation]").forEach(n=>{n.classList.add("invisible");const s={name:T2(n,"a-animation","pulse"),infinity:i2(n,"a-animation-infinity")};new IntersectionObserver((e,i)=>{e[0].isIntersecting&&(n.classList.remove("invisible"),n.classList.add(lt[s.name]),i.unobserve(n))},{threshold:.25}).observe(n)})},Ct=()=>{document.querySelectorAll("style").forEach(n=>{n.innerHTML=n.innerHTML.replace(/url\(/g,"url(/four-horses").replace(/\/{2,}/g,"/")})};J2().use(tt).use(dt).use(ct).use(Ct).template(U1("div",null,x())).template(U1("div",{id:"main",class:"bg-white text-black text-merriweather"},[et,Y1,Z("h-14 md:h-24"),st,Z("h-6 md:h-16"),nt,Z("h-30 md:h-50"),it,Z("h-30 md:h-50"),rt,Z("h-25 md:h-35"),Y1,at])).mount("#app");
