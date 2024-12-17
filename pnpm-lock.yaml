@@ -8,13 +8,13 @@ importers:
 
   .:
     dependencies:
+      gh-pages:
+        specifier: ^6.2.0
+        version: 6.2.0
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
     devDependencies:
-      gh-pages:
-        specifier: ^6.2.0
-        version: 6.2.0
       nodejs:
         specifier: ^0.0.0
         version: 0.0.0

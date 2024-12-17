@@ -7,6 +7,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
+		"deploy": "gh-pages -d dist",
 		"style": "node a-tailwind.js"
 	},
 	"keywords": [],
@@ -17,6 +18,7 @@
 		"vite": "^6.0.3"
 	},
 	"dependencies": {
+		"gh-pages": "^6.2.0",
 		"prettier": "^3.4.2"
 	}
 }
