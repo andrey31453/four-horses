@@ -1,5 +1,5 @@
-import logo from '/src/assets/icons/logo.svg?raw'
-import chevronRight from '/src/assets/icons/chevron-right.svg?raw'
+import logo from './icons/logo.svg?raw'
+import chevronRight from './icons/chevron-right.svg?raw'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 
@@ -7,7 +7,7 @@ const icons = {
 	'chevron-right': chevronRight,
 	logo,
 }
-class Icon extends HTMLElement {
+class Index extends HTMLElement {
 	constructor() {
 		super()
 		this.classList.add('flex')
@@ -32,4 +32,4 @@ svg {
 		)
 	}
 }
-customElements.define('a-icon', Icon)
+customElements.define('a-icon', Index)

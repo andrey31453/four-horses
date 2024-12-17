@@ -1,33 +1,37 @@
-import { singleton } from '../utils/singleton.js'
 import { defineLayers, layers } from './layers.js'
 import { normalizeStyle } from './normalize.js'
 import { scrollStyle } from './scroll.js'
 import { templateClasses } from './template.js'
 import { defineVars } from './vars.js'
-import { createSizeClasses } from './size.js'
-import { createBorderClasses, createBorderStyle } from './border.js'
-import { createGridClasses } from './grid.js'
-import { createColorStyle } from './color.js'
-import { createTextClasses } from './text.js'
+import { sizeClasses } from './size.js'
+import { borderClasses, borderStyle } from './border.js'
+import { gridClasses } from './grid.js'
+import { colorStyle } from './color.js'
+import { textClasses } from './text.js'
+import { animationClasses, animationStyle } from './animations.js'
 
-export const defineStyle = singleton((config) => [
+export const defineStyle = (config) => [
 	defineLayers(layers),
-	normalizeStyle,
-	scrollStyle,
+
+	// разнести по своим подпапкам
 	defineVars(config.colors),
-	defineVars(config.vars),
+	defineVars(config.animations.vars),
 	defineVars(config.font.sizes, 'text'),
-	createBorderStyle(),
-])
+
+	normalizeStyle(),
+	scrollStyle(),
+	borderStyle(),
+	animationStyle(),
+]
 
 // TODO Переписать на класс
-export const defineClasses = singleton((config) =>
+export const defineClasses = (config) =>
 	[
-		templateClasses,
-		createSizeClasses(config.sizes),
-		createBorderClasses(config.sizes, config.colors),
-		createGridClasses(config.grid),
-		createColorStyle(config.colors),
-		createTextClasses(config.font),
-	].flat(Infinity),
-)
+		templateClasses(),
+		animationClasses(config.animations),
+		sizeClasses(config.sizes),
+		borderClasses(config.sizes, config.colors),
+		gridClasses(config.grid),
+		colorStyle(config.colors),
+		textClasses(config.font),
+	].flat(Infinity)

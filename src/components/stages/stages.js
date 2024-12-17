@@ -2,6 +2,7 @@ import { aTailwindLink } from '/src/utils/helpers/a-tailwind-link'
 import { defineShadow } from '/src/utils/helpers/shadow'
 import { mounted } from '/src/utils/helpers/mounted.js'
 import { screenValue } from '/src/utils/helpers/screen-value.js'
+import { attributeJSON } from '../../utils/helpers/attribute.js'
 
 class Stages extends HTMLElement {
 	constructor() {
@@ -14,24 +15,20 @@ class Stages extends HTMLElement {
 		return [...this.children]
 	}
 	get #gridCols() {
-		return screenValue(JSON.parse(this.getAttribute('a-cols') ?? {})) || 12
+		return screenValue(attributeJSON(this, 'a-cols', 12))
 	}
 	get #stageGroupsQuantity() {
-		return (
-			screenValue(JSON.parse(this.getAttribute('a-stages-group') ?? {})) || 1
-		)
+		return screenValue(attributeJSON(this, 'a-stages-group', 1))
 	}
 	cols = (i) => {
-		return screenValue(
-			JSON.parse(this.#children[i]?.getAttribute('cols') ?? '{ "xs": 1 }'),
-		)
+		return this.#children[i]
+			? screenValue(attributeJSON(this.#children[i], 'cols', { xs: 1 }))
+			: { xs: 1 }
 	}
 	rows = (i) => {
-		return (
-			screenValue(
-				JSON.parse(this.#children[i]?.getAttribute('rows') ?? '{ "xs": 1 }'),
-			) || 1
-		)
+		return this.#children[i]
+			? screenValue(attributeJSON(this.#children[i], 'rows', { xs: 1 }))
+			: { xs: 1 }
 	}
 	stageQuantities = (i) => {
 		const cols = this.cols(i) === 1 ? 0 : this.cols(i)
@@ -81,7 +78,6 @@ class Stages extends HTMLElement {
 		<a-slider
 		 a-id="stages"
 		 slides='{"xs": 1}'
-		 controls-variant="decimal"
 		>
 		 ${this.#slot}
 		</a-slider>

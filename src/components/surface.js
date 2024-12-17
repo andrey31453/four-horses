@@ -25,7 +25,7 @@ ${aTailwindLink()}
 .surface {
   position: relative;
 	
-	background-image: url("src/assets/images/surface.png");
+	background-image: url("images/surface.png");
 	background-position: center;
 	background-repeat: repeat;
 	background-size: auto auto;

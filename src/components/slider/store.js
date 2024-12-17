@@ -1,3 +1,8 @@
+import {
+	attributeBoolean,
+	attributeJSON,
+} from '../../utils/helpers/attribute.js'
+
 const _store = {
 	props: {},
 	state: {},
@@ -35,14 +40,14 @@ class Store {
 	#defineProps = (id, ctx) => {
 		_store.props[id] = {
 			'controls-variant': ctx.getAttribute('controls-variant') ?? 'dots',
-			infinity: ctx.getAttribute('infinity') !== null,
+			infinity: attributeBoolean(ctx, 'infinity'),
 			'auto-change': +ctx.getAttribute('auto-change'),
-			slides: JSON.parse(ctx.getAttribute('slides') ?? null) || {
+			slides: attributeJSON(ctx, 'slides', {
 				xs: 1,
 				sm: 2,
 				md: 3,
 				xl: 4,
-			},
+			}),
 		}
 	}
 	defineState = (id, ctx) => {

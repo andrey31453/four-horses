@@ -10,7 +10,6 @@ export class ATailwind {
 	constructor(config) {
 		this.config = config
 	}
-	k
 
 	#classesMap = () =>
 		withModifiers(defineClasses(this.config)).reduce(
@@ -50,6 +49,8 @@ export class ATailwind {
 		)
 
 	generate = (link) => {
+		const duration = new Date().getTime()
+
 		const classesMap = this.#classesMap()
 		const useCLasses = this.#useCLasses(classesMap)
 		const shieldingClasses = this.#shieldingClasses(classesMap, useCLasses)
@@ -58,6 +59,12 @@ export class ATailwind {
 		fs.writeFileSync(
 			link,
 			minimizeCSS(defineStyle(this.config).join('') + layerClasses.join('')),
+		)
+
+		console.log(
+			`Стили были сгенерированы: ${
+				Math.round((new Date().getTime() - duration) / 10 ** 2) / 10
+			}c`,
 		)
 	}
 }

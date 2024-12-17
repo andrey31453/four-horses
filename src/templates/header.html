@@ -1,7 +1,7 @@
 <a-surface>
 	<section
 		id="header"
-		class="header md:h-screen flex flex-col justify-start items-start p-4.5 md:py-6 md:px-18"
+		class="header min-h-screen flex flex-col justify-start items-start p-4.5 md:py-6 md:px-18"
 	>
 		<a-icon
 			a-icon="logo"
@@ -53,7 +53,7 @@
 <style>
 	body:not(.md) {
 		#header.header {
-			background-image: url('/src/assets/images/banner-mobile.png');
+			background-image: url('/images/banner-mobile.png');
 			background-position: 100% bottom;
 			background-size: 100% auto;
 			background-repeat: no-repeat;
@@ -61,7 +61,7 @@
 	}
 	body.md {
 		#header.header {
-			background-image: url('/src/assets/images/banner-desktop.png');
+			background-image: url('/images/banner-desktop.png');
 			background-position: center center;
 			background-size: auto 100%;
 			background-repeat: no-repeat;

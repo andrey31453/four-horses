@@ -19,7 +19,7 @@ class Participant extends HTMLElement {
 		this.innerHTML = `
 <div class="px-4 grid justify-center gap-1">
 	<div class="bg-surface rounded-full overflow-hidden">
-		<image class="w-full" src="${this.getAttribute('image') ?? '/src/assets/icons/participant.svg'}">
+		<image class="w-full" src="${this.getAttribute('image') ?? 'icons/participant.svg'}">
 	</div>
 	<div class="h-4"></div>
 	<div class="text-center leading-120 text-golos font-semibold text-xl">${this.getAttribute('name')}</div>

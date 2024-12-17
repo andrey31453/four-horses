@@ -21,8 +21,8 @@ class Bootstrap {
 		}
 
 		target.setAttribute('a-mount', '')
-		this.#uses.forEach((use) => use())
 		this.#templates.forEach((template) => target.appendChild(template))
+		this.#uses.forEach((use) => use())
 	}
 }
 export const bootstrap = () => new Bootstrap()

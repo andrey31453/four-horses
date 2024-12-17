@@ -15,12 +15,12 @@ const borderWidthClass = (size) => [
 const borderColorClass = (name) =>
 	`border-${name} {border-color: rgb(var(--${name}));}`
 
-export const createBorderStyle = () =>
+export const borderStyle = () =>
 	withLayer(layers.base, '*,::before,::after{border: 0 solid transparent;}')
 
-export const createBorderClasses = (sizes, colors) => [
+export const borderClasses = (sizes, colors) => [
 	`rounded-full {border-radius: 9999px;}`,
-	[...Array(sizes.decreasedQuantity + 1).keys()].reduce((classes, size) => {
+	[...Array(sizes.quantity + 1).keys()].reduce((classes, size) => {
 		classes.push(roundedClass(size))
 		classes.push(borderWidthClass(size))
 		return classes

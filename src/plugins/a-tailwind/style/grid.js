@@ -22,7 +22,7 @@ const colSpanClass = (size) =>
 const gridColsClass = (size) =>
 	`grid-cols-${size} {grid-template-columns: repeat(${size}, minmax(0, 1fr));}`
 
-export const createGridClasses = (config) => [
+export const gridClasses = (config) => [
 	initialGridClasses,
 	[...Array(config.cols).keys()]
 		.map((i) => i + 1)

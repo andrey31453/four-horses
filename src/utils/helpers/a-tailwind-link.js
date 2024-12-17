@@ -1,2 +1,2 @@
 export const aTailwindLink = () =>
-	`<link href="src/assets/styles/a-tailwind.css" rel="stylesheet">`
+	`<link href="styles/a-tailwind.css" rel="stylesheet">`

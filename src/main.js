@@ -12,10 +12,12 @@ import footer from '/src/templates/footer.html?raw'
 import runningLine from '/src/templates/running-line.html?raw'
 import participants from '/src/templates/participants.html?raw'
 import { useScrollTo } from './composables/scroll-to.js'
+import { useAnimation } from './composables/animation.js'
 
 bootstrap()
 	.use(useScreenClass)
 	.use(useScrollTo)
+	.use(useAnimation)
 	.template(defineTemplate('div', null, aTailwindLink()))
 	.template(
 		defineTemplate(

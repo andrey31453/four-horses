@@ -15,4 +15,4 @@ const _scrollStyle = `
   background: linear-gradient(to bottom, rgb(var(--primary)), rgb(var(--red)));
 }
 `
-export const scrollStyle = withLayer(layers.base, _scrollStyle)
+export const scrollStyle = () => withLayer(layers.base, _scrollStyle)

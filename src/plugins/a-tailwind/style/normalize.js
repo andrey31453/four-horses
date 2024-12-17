@@ -186,4 +186,4 @@ display: none;
 display: none;
 }
 `
-export const normalizeStyle = withLayer(layers.base, _normalizeStyle)
+export const normalizeStyle = () => withLayer(layers.base, _normalizeStyle)

@@ -41,7 +41,7 @@ const textWeightClasses = (leadings) =>
 		return classes
 	}, [])
 
-export const createTextClasses = (config) => [
+export const textClasses = (config) => [
 	initialTextClasses,
 	textSizeClasses(config.sizes),
 	textWeightClasses(config.bold),

@@ -1,4 +1,4 @@
-export const templateClasses = [
+export const templateClasses = () => [
 	'block {display: block;}',
 	'hidden {display: none;}',
 
@@ -27,6 +27,4 @@ export const templateClasses = [
 	'cursor-not-allowed {cursor: not-allowed;}',
 	'pointer-events-none {pointer-events: none;}',
 	'pointer-events-auto {pointer-events: auto;}',
-
-	`transition {transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: var(--animation-duration);}`,
 ]

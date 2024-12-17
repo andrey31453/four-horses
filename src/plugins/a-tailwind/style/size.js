@@ -1,9 +1,11 @@
 // TODO style plugin add function max min to w & h
 const initialClasses = [
 	'w-full{width: 100%}',
+	'size-full{width: 100%;height: 100%;}',
 	'max-w-full{width: 100%}',
 	'h-full{height: 100%}',
 	'h-screen{height: 100vh;}',
+	'min-h-screen{min-height: 100vh;}',
 ]
 
 const sizeClass = ({ name, remSize }) => [
@@ -55,27 +57,19 @@ const marginClass = ({ name, remSize }) => [
 const withHalf = (size) => ({ name: `${size}\\.5`, remSize: (size + 0.5) / 4 })
 const withoutHalf = (size) => ({ name: size, remSize: size / 4 })
 
-const createBaseSizeClasses = (baseQuantity) =>
-	[...Array(baseQuantity + 1).keys()].reduce((classes, size) => {
+export const sizeClasses = (config) => [
+	initialClasses,
+	[...Array(config.quantity + 1).keys()].reduce((classes, size) => {
 		classes.push(positionClass(withoutHalf(size)))
 		classes.push(gapClass(withoutHalf(size)))
 		classes.push(gapClass(withHalf(size)))
 		classes.push(paddingClass(withHalf(size)))
 		classes.push(paddingClass(withoutHalf(size)))
 		classes.push(marginClass(withoutHalf(size)))
-		return classes
-	}, [])
-const createIncreasedSizeClasses = (increasedQuantity) =>
-	[...Array(increasedQuantity + 1).keys()].reduce((classes, size) => {
 		classes.push(sizeClass(withHalf(size)))
 		classes.push(sizeClass(withoutHalf(size)))
 		classes.push(wClass(withoutHalf(size)))
 		classes.push(hClass(withoutHalf(size)))
 		return classes
-	}, [])
-
-export const createSizeClasses = (config) => [
-	initialClasses,
-	createBaseSizeClasses(config.baseQuantity),
-	createIncreasedSizeClasses(config.increasedQuantity),
+	}, []),
 ]

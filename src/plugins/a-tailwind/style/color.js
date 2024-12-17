@@ -18,7 +18,7 @@ const decorationClass = (name) =>
 const textClass = (name) => `text-${name} {color: rgb(var(--${name}));}`
 const bgClass = (name) => `bg-${name} {background-color: rgb(var(--${name}));}`
 
-export const createColorStyle = (config) =>
+export const colorStyle = (config) =>
 	Object.entries(config).reduce((classes, [name]) => {
 		classes.push(decorationClass(name))
 		classes.push(textClass(name))

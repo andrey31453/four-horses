@@ -41,6 +41,7 @@ class SliderControls extends HTMLElement {
 			'decimal-current': this.shadowRoot.getElementById('decimal-current'),
 			'decimal-quantity': this.shadowRoot.getElementById('decimal-quantity'),
 			dots: this.shadowRoot.querySelectorAll('.js__dot'),
+			['dot-animates']: this.shadowRoot.querySelectorAll('.js__dot-animate'),
 		}
 	}
 
@@ -54,7 +55,13 @@ class SliderControls extends HTMLElement {
 	// render
 	#dot = () => {
 		return `
-<div class="js__dot size-2.5 rounded-full bg-secondary-800"></div>`
+<div class="relative">
+	<div class="js__dot hidden">
+			<div class="absolute animate-ping size-full rounded-full bg-black/85"></div>
+			<div class="absolute size-full rounded-full bg-black"></div>
+	</div>
+	<div class="size-2.5 rounded-full bg-secondary-800"></div>
+</div>`
 	}
 	#dots = () => {
 		return `
@@ -158,8 +165,8 @@ ${aTailwindLink()}`,
 	#updateDotted = () => {
 		this.#node.dots.forEach((item, idx) => {
 			idx === this.#bus.state.slide.current
-				? item.classList.add('!bg-black')
-				: item.classList.remove('!bg-black')
+				? item.classList.remove('hidden')
+				: item.classList.add('hidden')
 		})
 	}
 	#update = () => {

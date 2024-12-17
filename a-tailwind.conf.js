@@ -31,9 +31,7 @@ export const config = {
 	},
 
 	sizes: {
-		decreasedQuantity: 140,
-		baseQuantity: 140,
-		increasedQuantity: 140,
+		quantity: 140,
 	},
 
 	grid: {
@@ -92,10 +90,16 @@ export const config = {
 		'secondary-900': '#e9ded4',
 	}),
 
-	vars: {
-		'animation-duration': {
-			value: 100,
-			measurement: 'ms',
+	animations: {
+		vars: {
+			'animation-duration': {
+				value: 100,
+				measurement: 'ms',
+			},
+		},
+		durations: {
+			max: 4000,
+			step: 100,
 		},
 	},
 
@@ -104,6 +108,7 @@ export const config = {
 		'./src/main.js',
 		'./src/components',
 		'./src/templates',
+		'./src/composables',
 	],
 	safeList: [...Array(12).keys()]
 		.map((i) => [
