@@ -44,3 +44,14 @@ bootstrap()
 		),
 	)
 	.mount('#app')
+
+const useBgImage = () => {
+	document.querySelectorAll('[a-bg-image]').forEach((el) => {
+		el.style.backgroundImage =
+			`url(${import.meta.env.BASE_URL}/${el.getAttribute('a-bg-image')})`.replace(
+				/\/\//,
+				'/',
+			)
+	})
+}
+useBgImage()
