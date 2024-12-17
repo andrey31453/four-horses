@@ -6,5 +6,5 @@ export default defineConfig({
 			'@': 'src',
 		},
 	},
-	base: '/<REPO>/',
+	base: 'four-horses',
 })
