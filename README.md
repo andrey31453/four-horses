@@ -1,16 +1,14 @@
 На проекте `НЕ ИСПОЛЬЗУЕТСЯ` tailwindcss или какие-либо другие фреймворки
 
-[GitHub Page](https://andrey31453.github.io/four-horses/)
-
 # install
 
 1. `npm i`
 2. `npm dev`
 3. http://localhost:5173/
 
-# Генерация стилей
+[GitHub Page](https://andrey31453.github.io/four-horses/)
 
-`npm style`
+**Генерация стилей** `npm style`
 
 # Folders map
 
