@@ -141,7 +141,7 @@ grid-template-columns: repeat(${3 * this.#children.length}, 1fr);`
 		nextTick(
 			[this.#offTransition, this.#update, this.#onTransition],
 			// TODO взять из рут
-			config.vars['animation-duration'].value,
+			config.animations.vars['animation-duration'].value,
 		)
 	}
 }
