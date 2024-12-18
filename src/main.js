@@ -13,13 +13,11 @@ import runningLine from '@/templates/running-line.html?raw'
 import participants from '@/templates/participants.html?raw'
 import { useScrollTo } from '@/composables/scroll-to.js'
 import { useAnimation } from '@/composables/animation.js'
-import { useViteBase } from '@/composables/vite-base.js'
 
 bootstrap()
 	.use(useScreenClass)
 	.use(useScrollTo)
 	.use(useAnimation)
-	.use(useViteBase)
 	.template(defineTemplate('div', null, aTailwindLink()))
 	.template(
 		defineTemplate(

@@ -9,7 +9,16 @@ class Bootstrap {
 		return this
 	}
 
+	viteBase = (template) => {
+		template.querySelectorAll('style').forEach((el) => {
+			el.innerHTML = el.innerHTML
+				.replace(/url\(/g, `url(${import.meta.env.BASE_URL}`)
+				.replace(/\/{2,}/g, '\/')
+		})
+	}
+
 	template = (template) => {
+		this.viteBase(template)
 		this.#templates.push(template)
 		return this
 	}
